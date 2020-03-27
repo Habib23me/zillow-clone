@@ -1,0 +1,50 @@
+enum Role {
+  REGISTERED
+  AGENT
+}
+
+type User {
+  id: ID!
+  email: String!
+  firstName: String
+  lastName: String
+  username: String!
+  image: String
+  role: Role!
+}
+
+input SignInInput {
+  email: String!
+  password: String!
+}
+
+input SignUpInput {
+  email: String!
+  username: String
+  firstName: String
+  lastName: String
+  password: String!
+  role: Role!
+}
+
+type File {
+  publicId: String!
+  url: String!
+}
+
+extend type Query {
+  me: User! @isAuthenticated
+}
+
+input UpdateProfileInput {
+  firstName: String
+  lastName: String
+  username: String
+}
+
+extend type Mutation {
+  signup(input: SignUpInput!): String
+  login(input: SignInInput!): String
+  uploadProfilePicture(file: Upload!): File! @isAuthenticated
+  updateProfile(input: UpdateProfileInput): User!
+}
