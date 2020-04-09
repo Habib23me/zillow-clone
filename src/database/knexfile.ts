@@ -1,5 +1,7 @@
 // Update with your config settings.
+
 import DATABASE_URL from "../utils/config";
+
 export = {
   development: {
     client: "postgresql",
@@ -28,7 +30,6 @@ export = {
       tableName: "knex_migrations",
     },
   },
-
   production: {
     client: "postgresql",
     connection: DATABASE_URL,
