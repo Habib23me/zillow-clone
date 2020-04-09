@@ -1,7 +1,6 @@
 // Update with your config settings.
 
 import config from "../utils/config";
-console.log(DATABASE_URL);
 export = {
   development: {
     client: "pg",
