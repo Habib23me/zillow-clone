@@ -1,6 +1,6 @@
-if (process.env.NODE_ENV == "development") {
-  require("dotenv").config();
-}
+import * as dotenv from "dotenv";
+dotenv.config();
+
 const PORT = process.env.PORT || 4000;
 const WORKERS = process.env.WORKERS || 1;
 const JWT_LIFE_TIME = process.env.JWT_LIFE_TIME || "15m";
