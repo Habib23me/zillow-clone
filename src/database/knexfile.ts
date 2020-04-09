@@ -1,5 +1,5 @@
 // Update with your config settings.
-
+import DATABASE_URL from "../utils/config";
 export = {
   development: {
     client: "postgresql",
@@ -19,11 +19,7 @@ export = {
 
   staging: {
     client: "postgresql",
-    connection: {
-      database: "zillow",
-      user: "username",
-      password: "password",
-    },
+    connection: DATABASE_URL,
     pool: {
       min: 2,
       max: 10,
@@ -35,11 +31,7 @@ export = {
 
   production: {
     client: "postgresql",
-    connection: {
-      database: "zillow",
-      user: "username",
-      password: "password",
-    },
+    connection: DATABASE_URL,
     pool: {
       min: 2,
       max: 10,

@@ -2,6 +2,7 @@ const PORT = process.env.PORT || 4000;
 const WORKERS = process.env.WORKERS || 1;
 const JWT_LIFE_TIME = process.env.JWT_LIFE_TIME || "15m";
 const CLOUDINARY_FOLDER = process.env.CLOUDINARY_FOLDER || "zillow";
+const DATABASE_URL = process.env.DATABASE_URL;
 import * as dotenv from "dotenv";
 dotenv.config();
 
@@ -15,4 +16,5 @@ export default {
   JWT_SECRET,
   JWT_LIFE_TIME,
   CLOUDINARY_FOLDER,
+  DATABASE_URL,
 };
