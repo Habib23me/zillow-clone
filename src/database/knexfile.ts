@@ -25,6 +25,7 @@ export = {
     migrations: {
       tableName: "knex_migrations",
     },
+    ssl: true,
   },
   production: {
     client: "postgresql",
@@ -32,5 +33,6 @@ export = {
     migrations: {
       tableName: "knex_migrations",
     },
+    ssl: true,
   },
 };

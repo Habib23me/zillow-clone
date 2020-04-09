@@ -9,10 +9,7 @@ const DATABASE_URL = process.env.DATABASE_URL || "";
 
 const JWT_SECRET = process.env.JWT_SECRET || "";
 const NODE_ENV = process.env.NODE_ENV || "production";
-console.log(NODE_ENV);
-console.log(DATABASE_URL);
-console.log(process.env.DATABASE_URL);
-console.log(process.env.NODE_ENV);
+
 export default {
   DATABASE_URL,
   PORT,
