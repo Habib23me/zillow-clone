@@ -21,8 +21,8 @@ input SignInInput {
 input SignUpInput {
   email: String!
   username: String
-  firstName: String
-  lastName: String
+  firstName: String!
+  lastName: String!
   password: String!
   role: Role!
 }
