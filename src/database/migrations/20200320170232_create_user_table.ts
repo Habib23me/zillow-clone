@@ -12,7 +12,6 @@ export async function up(knex: Knex): Promise<any> {
     table
       .integer("role")
       .unsigned()
-      .unique()
       .notNullable()
       .references("id")
       .inTable("role")
