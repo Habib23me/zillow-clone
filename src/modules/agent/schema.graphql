@@ -1,0 +1,36 @@
+type Agent {
+  userId: ID!
+  phone: String
+  brokerageName: String
+  brokerageAddress: String
+  city: String
+  zipCode: String
+  licenseNumber: String
+  licenceExpirationDate: DateTime
+  website: String
+  blog: String
+  twitter: String
+  linkedId: String
+}
+
+extend type Query {
+  agentProfile: Agent! @isAuthenticated
+}
+
+input UpdateAgentProfileInput {
+  phone: String
+  brokerageName: String
+  brokerageAddress: String
+  city: String
+  zipCode: String
+  licenseNumber: String
+  licenceExpirationDate: DateTime
+  website: String
+  blog: String
+  twitter: String
+  linkedId: String
+}
+
+extend type Mutation {
+  updateAgentProfile(input: UpdateAgentProfileInput): Agent!
+}
