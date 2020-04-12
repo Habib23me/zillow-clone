@@ -13,10 +13,6 @@ type Agent {
   linkedId: String
 }
 
-extend type Query {
-  agentProfile: Agent! @isAuthenticated
-}
-
 input UpdateAgentProfileInput {
   phone: String
   brokerageName: String
@@ -29,6 +25,11 @@ input UpdateAgentProfileInput {
   blog: String
   twitter: String
   linkedId: String
+}
+
+extend type Query {
+  agent(id: ID!): Agent!
+  agentProfile: Agent! @isAuthenticated
 }
 
 extend type Mutation {
