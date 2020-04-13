@@ -17,7 +17,7 @@ export class IsAuthenticatedDirective extends SchemaDirectiveVisitor {
       const context = args[2];
 
       if (!context || !context.user) {
-        throw new AuthenticationError("Not allowed");
+        throw new AuthenticationError("Not Authenticated");
       }
 
       return resolve.apply(this, args);
