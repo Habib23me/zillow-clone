@@ -6,18 +6,18 @@ import {
 import { defaultFieldResolver } from "graphql";
 
 const typeDef = gql`
-  directive @isAuthenticated on FIELD_DEFINITION
+  directive @isAgent on FIELD_DEFINITION
 `;
 
-export class IsAuthenticatedDirective extends SchemaDirectiveVisitor {
+export class IsAgentDirective extends SchemaDirectiveVisitor {
   visitFieldDefinition(field: any) {
     const { resolve = defaultFieldResolver } = field;
 
     field.resolve = async function (...args: any[]) {
       const context = args[2];
 
-      if (!context || !context.user) {
-        throw new AuthenticationError("Not Authenticated");
+      if (context.user.role != 2) {
+        throw new AuthenticationError("Not allowed");
       }
 
       return resolve.apply(this, args);
@@ -27,5 +27,5 @@ export class IsAuthenticatedDirective extends SchemaDirectiveVisitor {
 
 export default {
   typeDef,
-  directive: IsAuthenticatedDirective,
+  directive: IsAgentDirective,
 };

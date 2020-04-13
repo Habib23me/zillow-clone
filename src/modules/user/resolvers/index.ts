@@ -3,6 +3,8 @@ import login from "./login";
 import signup from "./signup";
 import uploadProfilePicture from "./upload-profile-picture";
 
+import updateProfile from "./update-profile";
+
 const resolvers = {
   Query: {
     me,
@@ -11,6 +13,7 @@ const resolvers = {
     login,
     signup,
     uploadProfilePicture,
+    updateProfile,
   },
   Role: {
     REGISTERED: 1,

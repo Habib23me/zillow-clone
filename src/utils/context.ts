@@ -22,7 +22,7 @@ const getUser = async (req: any) => {
       }
     }
   }
-  return new AuthenticationError("Invalid Authentication Token");
+  return null;
 };
 
 export default {

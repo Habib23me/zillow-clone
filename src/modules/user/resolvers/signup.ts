@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 import jsonwebtoken from "jsonwebtoken";
 import randomstring from "randomstring";
 import config from "../../../utils/config";
+import Agent from "../../../models/agent";
 
 const SALT_ROUNDS = 12;
 
@@ -24,12 +25,18 @@ const signup = async (_, { input }: { input: User }) => {
   //Resolve role
   // Hash Password, Generate userName And Insert user to database
   input.password = await bcrypt.hash(input.password, SALT_ROUNDS);
-  await User.query().insert(input);
+  const newUser = await User.query().insert(input).returning("*");
+
+  console.log(newUser.id);
+
+  if (input.role == 2) {
+    await newUser.$relatedQuery("agentProfile").insert({});
+  }
 
   //Return Signed JWT
   return jsonwebtoken.sign(
     {
-      username: input.username
+      username: input.username,
     },
     config.JWT_SECRET,
     { expiresIn: "1h" }
