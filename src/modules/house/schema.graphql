@@ -1,0 +1,94 @@
+enum HomeStatus {
+  FOR_SALE
+  FOR_RENT
+  SOLD
+}
+
+enum HomeType {
+  HOUSES
+  APARTMENT
+  CONDOS
+}
+
+type House {
+  id: ID!
+  streetAddress: String
+  city: String
+  state: String
+  zipCode: String
+  lat: Float
+  lng: Float
+  price: Float
+  dateSold: DateTime
+  noOfBathrooms: Float
+  noOfBedrooms: Int
+  noOfParkingSpots: Int
+  yearBuilt: String
+  isOpenHouse: Boolean
+  isPublished: Boolean
+  homeStatus: HomeStatus
+  homeType: HomeType
+  lister: User!
+}
+
+input newHouseInput {
+  streetAddress: String!
+  city: String!
+  state: String!
+  zipCode: String!
+  lat: Float
+  lng: Float
+  price: Float
+  noOfBathrooms: Float
+  noOfBedrooms: Int
+  noOfParkingSpots: Int
+  yearBuilt: String
+  isOpenHouse: Boolean
+  homeStatus: HomeStatus
+  homeType: HomeType
+}
+
+input updateHouseInput {
+  id: ID!
+  price: Float
+  dateSold: DateTime
+  noOfBathrooms: Float
+  noOfBedrooms: Int
+  noOfParkingSpots: Int
+  yearBuilt: String
+  isOpenHouse: Boolean
+  homeStatus: HomeStatus
+  homeType: HomeType
+}
+
+input addressInput {
+  streetAddress: String
+  city: String
+  state: String
+  zipCode: String
+}
+
+type Address {
+  formattedAddress: String
+  lat: Float
+  lng: Float
+  streetAddress: String
+  city: String
+  state: String
+  zipCode: String
+  country: String
+}
+
+extend type Query {
+  house(id: ID): House
+  verifyAddress(input: addressInput): Address
+}
+
+extend type Mutation {
+  publishHouse(id: ID): House @isAuthenticated
+  unpublishHouse(id: ID): House @isAuthenticated
+  addHouse(input: newHouseInput): House @isAuthenticated
+  # uploadPictures(file: Upload!): File! @isAuthenticated
+  # removePictures(input: [ID]!): House @isAuthenticated
+  updateHouse(input: updateHouseInput): House @isAuthenticated
+}

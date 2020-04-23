@@ -4,6 +4,7 @@ type Agent {
   brokerageName: String
   brokerageAddress: String
   city: String
+  state: String
   zipCode: String
   licenseNumber: String
   licenceExpirationDate: DateTime
@@ -18,6 +19,7 @@ input UpdateAgentProfileInput {
   brokerageName: String
   brokerageAddress: String
   city: String
+  state: String
   zipCode: String
   licenseNumber: String
   licenceExpirationDate: DateTime
