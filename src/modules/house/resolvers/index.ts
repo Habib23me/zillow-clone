@@ -5,6 +5,8 @@ import publishHouse from "./publish-house";
 import unpublishHouse from "./unpublish-house";
 import verifyAddress from "./verify-address";
 import uploadHousePicture from "./upload-house-picture";
+import removeHousePicture from "./remove-house-picture";
+
 import User from "../../../models/user";
 import House from "../../../models/house";
 
@@ -19,6 +21,7 @@ const resolvers = {
     publishHouse,
     unpublishHouse,
     uploadHousePicture,
+    removeHousePicture,
   },
   HomeStatus: {
     FOR_SALE: 1,
@@ -32,11 +35,11 @@ const resolvers = {
   },
   House: {
     //populate lister user data
-    async lister(house) {
+    async lister(house: House) {
       return await User.query().findById(house.listerId);
     },
     //populate house images url
-    async images(house) {
+    async images(house: House) {
       return await House.relatedQuery("images").for(house.id);
     },
   },

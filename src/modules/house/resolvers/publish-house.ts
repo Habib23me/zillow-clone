@@ -23,6 +23,14 @@ const publishHouse = async (_, args, { user }: { user: User }) => {
       if (!house.homeStatus) {
         throw Error("You need to set home status before publishing");
       }
+      //Check if the home type is set
+      if (!house.homeType) {
+        throw Error("You need to set home type before publishing");
+      }
+
+      if (!house.livingArea || house.livingArea == 0) {
+        throw Error("You need to set living area before publishing");
+      }
       //Finally set home as published
       return await house
         .$query()

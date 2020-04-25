@@ -31,6 +31,7 @@ input SignUpInput {
 type Image {
   id: ID
   imagePath: String!
+  fullURL: String!
 }
 
 extend type Query {

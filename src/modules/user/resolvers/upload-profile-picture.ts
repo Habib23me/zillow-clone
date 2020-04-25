@@ -15,6 +15,7 @@ const uploadProfilePicture = async (
     });
     return {
       imagePath: result.public_id,
+      fullURL: result.url,
     };
   } catch (error) {
     throw new ApolloError("Image Upload Failed");
