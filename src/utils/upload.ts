@@ -3,12 +3,13 @@ import { v4 as uuidv4 } from "uuid";
 import config from "./config";
 
 const uploadImageStream = (
-  stream: any
+  stream: any,
+  folder: string
 ): Promise<cloudinary.UploadApiResponse> => {
   return new Promise((resolve, reject) => {
     const cld_upload_stream = cloudinary.v2.uploader.upload_stream(
       {
-        folder: config.CLOUDINARY_FOLDER + "/user-images",
+        folder: config.CLOUDINARY_FOLDER + folder,
         overwrite: false,
         format: "jpg",
         public_id: uuidv4(),
