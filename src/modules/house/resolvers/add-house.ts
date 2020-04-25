@@ -1,6 +1,6 @@
 import User from "../../../models/user";
 import House from "../../../models/house";
-
+import { transaction } from "objection";
 import * as GoogleMapsHelper from "../../../utils/googleMaps";
 
 const addHouse = async (
@@ -37,8 +37,14 @@ const addHouse = async (
   }
   input.streetAddress = address.streetAddress;
   input.country = address.country;
-  console.log(input);
-  return await user.$relatedQuery("houses").insert(input);
+  return await transaction(House.knex(), async (trx) => {
+    return await user
+      .$relatedQuery("houses", trx)
+      .insertGraph(input, {
+        relate: true,
+      })
+      .returning("*");
+  });
 };
 
 export default addHouse;
