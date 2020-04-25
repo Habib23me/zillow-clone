@@ -1,5 +1,6 @@
 import { Model, Modifiers } from "objection";
 import User from "./user";
+import Image from "./image";
 
 export default class House extends Model {
   id!: number;
@@ -11,6 +12,7 @@ export default class House extends Model {
   lat?: number;
   lng?: number;
   price?: number;
+  livingArea: number;
   dateSold?: Date;
   noOfBathrooms?: number;
   noOfBedrooms?: number;
@@ -22,6 +24,7 @@ export default class House extends Model {
   homeType?: number;
   lister?: User;
   listerId!: number;
+  images?: Image[];
 
   static tableName = "house";
 
@@ -38,6 +41,7 @@ export default class House extends Model {
       lat: { type: "float" },
       lng: { type: "float" },
       price: { type: "float" },
+      livingArea: { type: "float" },
       dateSold: { type: "Date" },
       noOfBathrooms: { type: "float" },
       noOfBedrooms: { type: "integer" },
@@ -58,6 +62,18 @@ export default class House extends Model {
       join: {
         from: "house.listerId",
         to: "user.id",
+      },
+    },
+    images: {
+      relation: Model.ManyToManyRelation,
+      modelClass: Image,
+      join: {
+        from: "house.id",
+        through: {
+          from: "houseImage.houseId",
+          to: "houseImage.imageId",
+        },
+        to: "image.id",
       },
     },
   });
