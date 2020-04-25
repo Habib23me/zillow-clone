@@ -25,7 +25,12 @@ export default class House extends Model {
   lister?: User;
   listerId!: number;
   images?: Image[];
+  created_at?: Date;
 
+  daysListed() {
+    const diffTime = Math.abs(this.created_at.getTime() - new Date().getTime());
+    return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  }
   static tableName = "house";
 
   static jsonSchema = {
