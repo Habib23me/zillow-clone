@@ -7,6 +7,7 @@ const verifyHouse = async (
   _,
   { input }: { input: GoogleMapsHelper.Address }
 ) => {
+  // Get parsed address from google maps
   const address = await GoogleMapsHelper.geocodeAddress(
     input.streetAddress +
       "," +
@@ -16,6 +17,7 @@ const verifyHouse = async (
       " " +
       input.zipCode
   );
+  // Check if the house is already listed
   const alreadyExists = await House.query().findOne({
     streetAddress: address.streetAddress,
     city: address.city,

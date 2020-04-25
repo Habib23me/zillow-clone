@@ -31,9 +31,11 @@ const resolvers = {
     CONDOS: 3,
   },
   House: {
+    //populate lister user data
     async lister(house) {
       return await User.query().findById(house.listerId);
     },
+    //populate house images url
     async images(house) {
       return await House.relatedQuery("images").for(house.id);
     },

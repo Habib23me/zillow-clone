@@ -10,7 +10,9 @@ const uploadHousePicture = async (
 ) => {
   const { createReadStream, filename, mimetype, encoding } = await file;
   try {
+    //Upload image
     const result = await uploadImageStream(createReadStream(), "/house-images");
+    //Add image to database
     const image = await Image.query().insert({
       imagePath: result.public_id,
     });
