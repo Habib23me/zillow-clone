@@ -28,9 +28,9 @@ input SignUpInput {
   role: Role!
 }
 
-type File {
-  publicId: String!
-  url: String!
+type Image {
+  id: ID
+  imagePath: String!
 }
 
 extend type Query {
@@ -46,6 +46,6 @@ input UpdateProfileInput {
 extend type Mutation {
   signup(input: SignUpInput!): String
   login(input: SignInInput!): String
-  uploadProfilePicture(file: Upload!): File! @isAuthenticated
+  uploadProfilePicture(file: Upload!): Image! @isAuthenticated
   updateProfile(input: UpdateProfileInput): User!
 }

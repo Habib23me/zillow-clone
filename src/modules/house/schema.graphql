@@ -29,6 +29,11 @@ type House {
   homeStatus: HomeStatus
   homeType: HomeType
   lister: User!
+  images: [Image]!
+}
+
+input imageInput {
+  id: ID!
 }
 
 input newHouseInput {
@@ -39,13 +44,15 @@ input newHouseInput {
   lat: Float
   lng: Float
   price: Float
-  noOfBathrooms: Float
-  noOfBedrooms: Int
-  noOfParkingSpots: Int
+  livingArea: Float!
+  noOfBathrooms: Float!
+  noOfBedrooms: Int!
+  noOfParkingSpots: Int!
   yearBuilt: String
-  isOpenHouse: Boolean
+  isOpenHouse: Boolean!
   homeStatus: HomeStatus
-  homeType: HomeType
+  homeType: HomeType!
+  images: [imageInput]
 }
 
 input updateHouseInput {
@@ -59,10 +66,11 @@ input updateHouseInput {
   isOpenHouse: Boolean
   homeStatus: HomeStatus
   homeType: HomeType
+  images: [ID]!
 }
 
 input addressInput {
-  streetAddress: String
+  streetAddress: String!
   city: String
   state: String
   zipCode: String
@@ -77,18 +85,18 @@ type Address {
   state: String
   zipCode: String
   country: String
+  house: House
 }
 
 extend type Query {
-  house(id: ID): House
-  verifyAddress(input: addressInput): Address
+  house(id: ID!): House
+  verifyAddress(input: addressInput!): Address!
 }
 
 extend type Mutation {
-  publishHouse(id: ID): House @isAuthenticated
-  unpublishHouse(id: ID): House @isAuthenticated
-  addHouse(input: newHouseInput): House @isAuthenticated
-  # uploadPictures(file: Upload!): File! @isAuthenticated
-  # removePictures(input: [ID]!): House @isAuthenticated
-  updateHouse(input: updateHouseInput): House @isAuthenticated
+  publishHouse(id: ID!): House! @isAuthenticated
+  unpublishHouse(id: ID!): House! @isAuthenticated
+  addHouse(input: newHouseInput!): House! @isAuthenticated
+  uploadHousePicture(file: Upload!): Image! @isAuthenticated
+  updateHouse(input: updateHouseInput!): House! @isAuthenticated
 }
