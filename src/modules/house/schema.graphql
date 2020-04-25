@@ -21,85 +21,47 @@ A house type that contains all the information about a house
 that is listed on zillow
 """
 type House {
-  """
-  The house's unique id
-  """
+  "The house's unique id"
   id: ID!
-  """
-  The house's address street address
-  """
+  "The house's address street address"
   streetAddress: String!
-  """
-  The house's address city
-  """
+  "The house's address city"
   city: String!
-  """
-  The house's address state
-  """
+  "The house's address state"
   state: String!
-  """
-  The house's address zip code
-  """
+  "The house's address zip code"
   zipCode: String!
-  """
-  The house's geographical latitude
-  """
+  "The house's geographical latitude"
   lat: Float!
-  """
-  The house's geographical longtiude
-  """
+  "The house's geographical longtiude"
   lng: Float!
-  """
-  The price the house is listed for
-  """
+  "The price the house is listed for"
   price: Float
-  """
-  The house's total living area in squared meters
-  """
-  livingArea: Float!
-  """
-  The date the house is sold only for SOLD homeTypes
-  """
+  "The house's total living area in squared meters"
+  livingArea: Float
+  "The date the house is sold only for SOLD homeTypes"
   dateSold: DateTime
-  """
-  The house's number of bathrooms
-  """
+  "The house's number of bathrooms"
   noOfBathrooms: Float
-  """
-  The house's number of bedrooms
-  """
+  "The house's number of bedrooms"
   noOfBedrooms: Int
-  """
-  The house's number of parinkg spots
-  """
+  "The house's number of parinkg spots"
   noOfParkingSpots: Int
-  """
-  The year the house was built on
-  """
+  "The year the house was built on"
   yearBuilt: String
-  """
-  Boolean indicating if the house is open for vistors
-  """
+  "Boolean indicating if the house is open for vistors"
   isOpenHouse: Boolean
-  """
-  Boolean indicating if the house is listed for the public to see
-  """
+  "Boolean indicating if the house is listed for the public to see"
   isPublished: Boolean
-  """
-  The house's current status
-  """
+  "The house's current status"
   homeStatus: HomeStatus!
-  """
-  The house's type
-  """
+  "The house's type"
   homeType: HomeType
-  """
-  The user who listed the property
-  """
+  "The user who listed the property"
   lister: User!
-  """
-  A list of images belonging to a house
-  """
+  "The amount of days since the home was listed on zillow"
+  daysListed: Int!
+  "A list of images belonging to a house"
   images: [Image]!
 }
 
@@ -107,141 +69,75 @@ type House {
 An input type for new houses to be listed
 """
 input newHouseInput {
-  """
-  The house's address street address
-  """
+  "The house's address street address"
   streetAddress: String!
-  """
-  The house's address city
-  """
+  "The house's address city"
   city: String!
-  """
-  The house's address state
-  """
+  "The house's address state"
   state: String!
-  """
-  The house's address zip code
-  """
+  "The house's address zip code"
   zipCode: String!
-  """
-  The house's geographical latitude
-  """
+  "The house's geographical latitude"
   lat: Float
-  """
-  The house's geographical longtiude
-  """
+  "The house's geographical longtiude"
   lng: Float
-  """
-  The price the house is listed for
-  """
+  "The price the house is listed for"
   price: Float
-  """
-  The house's total living area in squared meters
-  """
-  livingArea: Float!
-  """
-  The house's number of bathrooms
-  """
+  "The house's total living area in squared meters"
+  livingArea: Float
+  "The house's number of bathrooms"
   noOfBathrooms: Float
-  """
-  The house's number of bedrooms
-  """
+  "The house's number of bedrooms"
   noOfBedrooms: Int
-  """
-  The house's number of parinkg spots
-  """
+  "The house's number of parinkg spots"
   noOfParkingSpots: Int
-  """
-  The year the house was built on
-  """
+  "The year the house was built on"
   yearBuilt: String
-  """
-  Boolean indicating if the house is open for vistors
-  """
-  isOpenHouse: Boolean!
-  """
-  The house's current status
-  """
-  homeStatus: HomeStatus!
-  """
-  The house's type
-  """
-  homeType: HomeType!
-  """
-  ID's of the house's images
-  """
-  images: [ID]!
+  "Boolean indicating if the house is open for vistors"
+  isOpenHouse: Boolean
+  "The house's current status"
+  homeStatus: HomeStatus
+  "The house's type"
+  homeType: HomeType
 }
 
 """
 Input type for updating existing house input
 """
 input updateHouseInput {
-  """
-  The house's unique id
-  """
+  "The house's unique id"
   id: ID!
-  """
-  The price the house is listed for
-  """
+  "The price the house is listed for"
   price: Float
-  """
-  The house's total living area in squared meters
-  """
-  livingArea: Float!
-  """
-  The house's number of bathrooms
-  """
+  "The house's total living area in squared meters"
+  livingArea: Float
+  "The house's number of bathrooms"
   noOfBathrooms: Float
-  """
-  The house's number of bedrooms
-  """
+  "The house's number of bedrooms"
   noOfBedrooms: Int
-  """
-  The house's number of parinkg spots
-  """
+  "The house's number of parinkg spots"
   noOfParkingSpots: Int
-  """
-  The year the house was built on
-  """
+  "The year the house was built on"
   yearBuilt: String
-  """
-  Boolean indicating if the house is open for vistors
-  """
+  "Boolean indicating if the house is open for vistors"
   isOpenHouse: Boolean
-  """
-  The house's current status
-  """
+  "The house's current status"
   homeStatus: HomeStatus
-  """
-  The house's type
-  """
+  "The house's type"
   homeType: HomeType
-  """
-  ID's of the house's images
-  """
-  images: [ID]!
 }
 
 """
 Input type for verifting address'
 """
 input addressInput {
-  """
-  The address' street address
-  """
+  "The address' street address"
   streetAddress: String!
-  """
-  The address' city
-  """
+  "The address' city"
   city: String
-  """
-  The address' state
-  """
+  "The address' state"
   state: String
-  """
-  The address' zip code
-  """
+  "The address' zip code"
   zipCode: String
 }
 
@@ -249,42 +145,34 @@ input addressInput {
 Type that contains info about a specific place
 """
 type AddressInfo {
-  """
-  Formatted Address String
-  """
+  "Formatted Address String"
   formattedAddress: String!
-  """
-  The address' geographical latitude
-  """
+  "The address' geographical latitude"
   lat: Float!
-  """
-  The address' geographical longtiude
-  """
+  "The address' geographical longtiude"
   lng: Float!
-  """
-  The address' street address
-  """
+  "The address' street address"
   streetAddress: String
-  """
-  The address' city
-  """
+  "The address' city"
   city: String
-  """
-  The address' state
-  """
+  "The address' state"
   state: String
-  """
-  The address' zip code
-  """
+  "The address' zip code"
   zipCode: String
-  """
-  The address' country
-  """
+  "The address' country"
   country: String
-  """
-  The house listed under this address if there is one
-  """
+  "The house listed under this address if there is one"
   house: House
+}
+
+"""
+Input type for uploading an Image for a house
+"""
+input uploadHouseImageInput {
+  "The image to upload"
+  file: Upload!
+  "The id of the house to upload to"
+  houseId: ID!
 }
 
 extend type Query {
@@ -314,9 +202,13 @@ extend type Mutation {
   """
   Upload pictures of a house
   """
-  uploadHousePicture(file: Upload!): Image! @isAuthenticated
+  uploadHousePicture(input: uploadHouseImageInput): Image! @isAuthenticated
   """
   Update alreday existing house information
   """
   updateHouse(input: updateHouseInput!): House! @isAuthenticated
+  """
+  Remove an image from a house based on it's id
+  """
+  removeHousePicture(imageId: ID!): House! @isAuthenticated
 }
