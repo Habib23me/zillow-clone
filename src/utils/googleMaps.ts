@@ -29,13 +29,17 @@ async function geocodeAddress(address: string) {
       timeout: 1000, // milliseconds
     })
     .then((result) => {
-      try {
-        if (result.data.status === Status.OK) {
-          if (
-            !result.data.results[0].types.includes(AddressType.street_address)
-          ) {
-            throw Error("Invalid Address");
-          }
+      if (result.data.status === Status.OK) {
+        if (
+          !(
+            result.data.results[0].types.includes(AddressType.street_address) ||
+            result.data.results[0].types.includes(AddressType.premise) ||
+            result.data.results[0].types.includes(AddressType.subpremise)
+          )
+        ) {
+          throw Error("Address Not a Valid Building");
+        }
+        try {
           parsedAddress.formattedAddress =
             result.data.results[0].formatted_address;
           parsedAddress.streetAddress = result.data.results[0].formatted_address.split(
@@ -64,12 +68,13 @@ async function geocodeAddress(address: string) {
               parsedAddress.city = component.short_name;
             }
           });
-        } else {
-          throw "Error While Parsing Address";
+        } catch (error) {
+          throw Error("Error Parsing Address");
         }
-      } catch (error) {
-        throw Error("Invalid Street Address");
+      } else {
+        throw "Error Retrieving Address Info";
       }
+
       return parsedAddress;
     });
 }
