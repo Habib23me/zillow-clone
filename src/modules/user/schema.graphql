@@ -12,7 +12,7 @@ type User {
   image: String
   role: Role!
   houses: [House]
-  contactForms: [ContactForm]
+  forms: [Form]
 }
 
 input SignInInput {

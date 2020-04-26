@@ -3,6 +3,7 @@ import markContactFormAsRead from "./mark-contact-form-as-read";
 import submitContactForm from "./submit-contact-form";
 import ContactForm from "../../../models/contact-form";
 import House from "../../../models/house";
+import RentForm from "../../../models/rent-form";
 
 const resolvers = {
   Query: {

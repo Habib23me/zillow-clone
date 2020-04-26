@@ -1,11 +1,14 @@
 import { Model, Modifiers } from "objection";
 import House from "./house";
 
-export default class ContactForm extends Model {
+export default class RentForm extends Model {
   id!: number;
   name!: string;
   email!: string;
   phone!: string;
+  desiredMoveInDate!: Date;
+  grossHouseholdIncome!: number;
+  desiredDuration: number;
   shortMessage?: string;
   houseId?: number;
   house?: House;
@@ -17,10 +20,10 @@ export default class ContactForm extends Model {
   }
 
   formType() {
-    return "ContactForm";
+    return "RentForm";
   }
 
-  static tableName = "contactForm";
+  static tableName = "rentForm";
 
   static jsonSchema = {
     type: "object",
@@ -30,6 +33,9 @@ export default class ContactForm extends Model {
       name: { type: "string", minLength: 1, maxLength: 64 },
       email: { type: "string", minLength: 1, maxLength: 64 },
       phone: { type: "string", minLength: 1, maxLength: 16 },
+      desiredMoveInDate: { type: "date" },
+      grossHouseholdIncome: { type: "float" },
+      desiredDuration: { type: "integer" },
       shortMessage: { type: "string", minLength: 1, maxLength: 256 },
       isRead: { type: "boolean" },
       houseId: { type: "integer" },
@@ -41,7 +47,7 @@ export default class ContactForm extends Model {
       relation: Model.BelongsToOneRelation,
       modelClass: House,
       join: {
-        from: "contactForm.houseId",
+        from: "rentForm.houseId",
         to: "house.id",
       },
     },

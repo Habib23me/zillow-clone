@@ -1,8 +1,8 @@
 """
-Contact Form data that contins fields submitted by someone
-wanting to buy a house
+Form data that contins fields submitted by someone
+wanting to rent a house
 """
-type ContactForm implements Form {
+type RentForm implements Form {
   "The Contact Form's Unique Identifier"
   id: ID!
   "Name of the person who submitted the form"
@@ -11,6 +11,12 @@ type ContactForm implements Form {
   email: String!
   "Phone Number of the person who submitted the form"
   phone: String!
+  "The desired move in date of the renter in to the house"
+  desiredMoveInDate: Date
+  "The Gross House Hold Income of the renter per month"
+  grossHouseholdIncome: Float
+  "The desired stay duration of the renter in days"
+  desiredDuration: Int
   "Short message the person wrote in with the form"
   shortMessage: String
   "The house it is submitted to"
@@ -25,15 +31,21 @@ type ContactForm implements Form {
 
 """
 An Input type that contains the fields required to send a contact
-me back message to a lister that has a House on sale
+me back message to a lister that has a House for rent
 """
-input contactFormInput {
+input rentFormInput {
   "Name of the person who submitted the form"
   name: String!
   "Email of the person who submitted the form"
   email: String!
   "Phone Number of the person who submitted the form"
   phone: String!
+  "The desired move in date of the renter in to the house"
+  desiredMoveInDate: Date
+  "The Gross House Hold Income of the renter per month"
+  grossHouseholdIncome: Float
+  "The desired stay duration of the renter"
+  desiredDuration: Int
   "Short message the person wrote in with the form"
   shortMessage: String
   "The house it is submitted to"
@@ -42,18 +54,18 @@ input contactFormInput {
 
 extend type Query {
   """
-  Gets a contact forms information based on it's id
+  Gets a rent form's information based on its id
   """
-  contactForm(id: ID!): ContactForm @isAuthenticated
+  rentForm(id: ID!): RentForm @isAuthenticated
 }
 
 extend type Mutation {
   """
-  Submits a contact form
+  Submits a rent form
   """
-  submitContactForm(input: contactFormInput!): ContactForm!
+  submitRentForm(input: rentFormInput!): RentForm!
   """
-  Marks a contact for as read
+  Marks a rent for as read
   """
-  markContactFormAsRead(id: ID!): ContactForm! @isAuthenticated
+  markRentFormAsRead(id: ID!): RentForm! @isAuthenticated
 }

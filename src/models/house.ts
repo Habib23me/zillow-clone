@@ -2,6 +2,7 @@ import { Model, Modifiers } from "objection";
 import User from "./user";
 import Image from "./image";
 import ContactForm from "./contact-form";
+import RentForm from "./rent-form";
 
 export default class House extends Model {
   id!: number;
@@ -89,6 +90,14 @@ export default class House extends Model {
       join: {
         from: "house.id",
         to: "contactForm.houseId",
+      },
+    },
+    rentForms: {
+      relation: Model.HasManyRelation,
+      modelClass: RentForm,
+      join: {
+        from: "house.id",
+        to: "rentForm.houseId",
       },
     },
   });

@@ -5,8 +5,6 @@ import uploadProfilePicture from "./upload-profile-picture";
 
 import updateProfile from "./update-profile";
 import User from "../../../models/user";
-import contactForm from "../../contact/resolvers/contact-form";
-import ContactForm from "../../../models/contact-form";
 import House from "../../../models/house";
 
 const resolvers = {
@@ -27,9 +25,11 @@ const resolvers = {
     async houses(user) {
       return await User.relatedQuery("houses").for(user.id);
     },
-    async contactForms(user) {
+    async forms(user) {
       const houses = User.relatedQuery("houses").for(user.id);
-      return await House.relatedQuery("contactForms").for(houses);
+      const contactForms = await House.relatedQuery("contactForms").for(houses);
+      const rentForms = await House.relatedQuery("rentForms").for(houses);
+      return [...contactForms, ...rentForms];
     },
   },
 };
