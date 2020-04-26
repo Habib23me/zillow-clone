@@ -2,7 +2,7 @@ import User from "../../../models/user";
 import House from "../../../models/house";
 import { transaction } from "objection";
 import * as GoogleMapsHelper from "../../../utils/googleMaps";
-
+import { isPositive } from "../../../utils/validator";
 const addHouse = async (
   _,
   { input }: { input: House },
@@ -37,21 +37,16 @@ const addHouse = async (
     throw Error("Invalid Number of Bathrooms");
   }
   // Validate No of bedrooms
-  if (input.price && input.noOfBedrooms < 0) {
-    throw Error("Invalid Number of Bedrooms");
-  }
+  isPositive(input.noOfBedrooms, "Invalid Number of Bedrooms");
+
   // Validate No of parking spots
-  if (input.price && input.noOfParkingSpots < 0) {
-    throw Error("Invalid Number of Parking Spots");
-  }
+  isPositive(input.noOfParkingSpots, "Invalid Number of Parking Spots");
+
   // Validate No of living area
-  if (input.price && input.livingArea < 0) {
-    throw Error("Invalid living area");
-  }
+  isPositive(input.livingArea, "Living Area must be positive");
+
   // Validate price
-  if (input.price && input.price < 0) {
-    throw Error("Invalid price");
-  }
+  isPositive(input.price, "Invalid price");
 
   //replace the address by the parsed one
   input.city = address.city;
