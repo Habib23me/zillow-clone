@@ -11,7 +11,7 @@ export async function up(knex: Knex): Promise<any> {
     table.float("lat", 14, 10);
     table.float("lng", 14, 10);
     table.float("price").defaultTo(0);
-    table.float("livingArea");
+    table.float("livingArea").defaultTo(0);
     table.date("dateSold");
     table.float("noOfBathrooms").defaultTo(0);
     table.integer("noOfBedrooms").defaultTo(0);
