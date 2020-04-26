@@ -13,6 +13,7 @@ export default class User extends Model {
   role!: number;
   agentProfile?: Agent;
   houses?: House[];
+  savedHouses?: House[];
 
   static tableName = "user";
 
@@ -47,6 +48,18 @@ export default class User extends Model {
       join: {
         from: "user.id",
         to: "house.listerId",
+      },
+    },
+    savedHouses: {
+      relation: Model.ManyToManyRelation,
+      modelClass: House,
+      join: {
+        from: "user.id",
+        through: {
+          from: "savedHouse.userId",
+          to: "savedHouse.houseId",
+        },
+        to: "house.id",
       },
     },
   });

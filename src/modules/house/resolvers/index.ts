@@ -6,6 +6,8 @@ import unpublishHouse from "./unpublish-house";
 import verifyAddress from "./verify-address";
 import uploadHousePicture from "./upload-house-picture";
 import removeHousePicture from "./remove-house-picture";
+import saveHouse from "./save-house";
+import removeSavedHouse from "./remove-saved-house";
 
 import User from "../../../models/user";
 import House from "../../../models/house";
@@ -22,6 +24,8 @@ const resolvers = {
     unpublishHouse,
     uploadHousePicture,
     removeHousePicture,
+    saveHouse,
+    removeSavedHouse,
   },
   HomeStatus: {
     FOR_SALE: 1,
@@ -42,7 +46,17 @@ const resolvers = {
     async images(house: House) {
       return await House.relatedQuery("images").for(house.id);
     },
-    //populate contact homes for the house
+    //return a boolean checking if the current logged in user has the house saved or not
+    async isSaved(house: House, args, { user }: { user: User }) {
+      const relationExists = await House.relatedQuery("saved")
+        .for(house.id)
+        .where("userId", user.id);
+      if (relationExists.length > 0) {
+        return true;
+      }
+      return false;
+    },
+    //populate the different forms for the house and append them in one
     async forms(house: House) {
       const contactForms = await House.relatedQuery("contactForms").for(
         house.id

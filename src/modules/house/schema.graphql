@@ -65,6 +65,8 @@ type House {
   images: [Image]!
   "Contact Forms submitted to the house"
   forms: [Form]! @isAuthenticated
+  "A Boolean indicating if the house is saved by the user or not"
+  isSaved: Boolean @isAuthenticated
 }
 
 """
@@ -213,4 +215,12 @@ extend type Mutation {
   Remove an image from a house based on it's id
   """
   removeHousePicture(imageId: ID!): House! @isAuthenticated
+  """
+  Add a house to saved houses
+  """
+  saveHouse(houseId: ID!): House @isAuthenticated
+  """
+  Remove a house from saved houses
+  """
+  removeSavedHouse(houseId: ID!): House @isAuthenticated
 }

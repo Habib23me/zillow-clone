@@ -3,6 +3,7 @@ import User from "./user";
 import Image from "./image";
 import ContactForm from "./contact-form";
 import RentForm from "./rent-form";
+import TourForm from "./tour-form";
 
 export default class House extends Model {
   id!: number;
@@ -29,11 +30,13 @@ export default class House extends Model {
   images?: Image[];
   contactForms?: ContactForm[];
   created_at?: Date;
+  saved?;
 
   daysListed() {
     const diffTime = Math.abs(this.created_at.getTime() - new Date().getTime());
     return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   }
+
   static tableName = "house";
 
   static jsonSchema = {
@@ -84,6 +87,18 @@ export default class House extends Model {
         to: "image.id",
       },
     },
+    saved: {
+      relation: Model.ManyToManyRelation,
+      modelClass: User,
+      join: {
+        from: "house.id",
+        through: {
+          from: "savedHouse.houseId",
+          to: "savedHouse.userId",
+        },
+        to: "user.id",
+      },
+    },
     contactForms: {
       relation: Model.HasManyRelation,
       modelClass: ContactForm,
@@ -98,6 +113,14 @@ export default class House extends Model {
       join: {
         from: "house.id",
         to: "rentForm.houseId",
+      },
+    },
+    tourForms: {
+      relation: Model.HasManyRelation,
+      modelClass: TourForm,
+      join: {
+        from: "house.id",
+        to: "tourForm.houseId",
       },
     },
   });

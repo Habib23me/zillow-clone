@@ -4,6 +4,7 @@ The avilable form types in zillow
 enum FormType {
   CONTACT_FORM
   RENT_FORM
+  TOUR_FORM
 }
 
 interface Form {
