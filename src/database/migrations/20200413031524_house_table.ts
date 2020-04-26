@@ -20,21 +20,21 @@ export async function up(knex: Knex): Promise<any> {
     table.boolean("isOpenHouse").defaultTo(false);
     table.boolean("isPublished").defaultTo(false);
     table
-      .bigInteger("homeStatus")
+      .integer("homeStatus")
       .unsigned()
       .index()
       .references("id")
       .inTable("homeStatus");
 
     table
-      .bigInteger("homeType")
+      .integer("homeType")
       .unsigned()
       .index()
       .references("id")
       .inTable("homeType");
 
     table
-      .bigInteger("listerId")
+      .integer("listerId")
       .unsigned()
       .index()
       .references("id")

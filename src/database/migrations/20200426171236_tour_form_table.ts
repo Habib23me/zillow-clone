@@ -1,17 +1,12 @@
 import * as Knex from "knex";
 
 export async function up(knex: Knex): Promise<any> {
-  return knex.schema.createTable("rentForm", (table) => {
+  return knex.schema.createTable("tourForm", (table) => {
     table.increments();
     table.string("name").notNullable();
     table.string("email").notNullable();
     table.string("phone").notNullable();
-    table.date("desiredMoveInDate");
-    table.float("grossHouseholdIncome");
-    table.integer("desiredDuration");
-
     table.string("shortMessage").defaultTo("");
-
     table.boolean("isRead").defaultTo(false);
     table
       .integer("houseId")
@@ -25,5 +20,5 @@ export async function up(knex: Knex): Promise<any> {
 }
 
 export async function down(knex: Knex): Promise<any> {
-  return knex.schema.dropTable("rentForm");
+  return knex.schema.dropTable("tourForm");
 }

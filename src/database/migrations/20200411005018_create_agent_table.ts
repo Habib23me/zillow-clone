@@ -3,7 +3,7 @@ import * as Knex from "knex";
 export async function up(knex: Knex): Promise<any> {
   return knex.schema.createTable("agent", (table) => {
     table
-      .bigInteger("userId")
+      .integer("userId")
       .unsigned()
       .index()
       .references("id")
