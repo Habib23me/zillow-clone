@@ -63,6 +63,8 @@ type House {
   daysListed: Int!
   "A list of images belonging to a house"
   images: [Image]!
+  "Contact Forms submitted to the house"
+  contactForms: [ContactForm]! @isAuthenticated
 }
 
 """

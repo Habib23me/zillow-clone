@@ -42,6 +42,10 @@ const resolvers = {
     async images(house: House) {
       return await House.relatedQuery("images").for(house.id);
     },
+    //populate contact homes for the house
+    async contactForms(house: House) {
+      return await House.relatedQuery("contactForms").for(house.id);
+    },
   },
 };
 
