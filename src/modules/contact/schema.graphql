@@ -2,7 +2,7 @@
 Contact Form data that contins fields submitted by someone
 wanting to buy a house
 """
-type ContactForm {
+type ContactForm implements Form {
   "The Contact Form's Unique Identifier"
   id: ID!
   "Name of the person who submitted the form"
@@ -19,6 +19,8 @@ type ContactForm {
   createdAt: DateTime!
   "A boolean that indicates if the form was read or not by the lister"
   isRead: Boolean!
+  "The form type"
+  formType: FormType!
 }
 
 """

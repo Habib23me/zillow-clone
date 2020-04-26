@@ -64,7 +64,7 @@ type House {
   "A list of images belonging to a house"
   images: [Image]!
   "Contact Forms submitted to the house"
-  contactForms: [ContactForm]! @isAuthenticated
+  forms: [Form]! @isAuthenticated
 }
 
 """
