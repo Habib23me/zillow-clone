@@ -1,6 +1,7 @@
 import { Model, Modifiers } from "objection";
 import User from "./user";
 import Image from "./image";
+import ContactForm from "./contact-form";
 
 export default class House extends Model {
   id!: number;
@@ -25,6 +26,7 @@ export default class House extends Model {
   lister?: User;
   listerId!: number;
   images?: Image[];
+  contactForms?: ContactForm[];
   created_at?: Date;
 
   daysListed() {
@@ -79,6 +81,14 @@ export default class House extends Model {
           to: "houseImage.imageId",
         },
         to: "image.id",
+      },
+    },
+    contactForms: {
+      relation: Model.HasManyRelation,
+      modelClass: ContactForm,
+      join: {
+        from: "house.id",
+        to: "contactForm.houseId",
       },
     },
   });
