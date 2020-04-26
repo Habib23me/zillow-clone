@@ -10,6 +10,7 @@ const resolvers = {
   FormType: {
     CONTACT_FORM: "ContactForm",
     RENT_FORM: "RentForm",
+    TOUR_FORM: "TourForm",
   },
 };
 

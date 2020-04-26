@@ -48,7 +48,8 @@ const resolvers = {
         house.id
       );
       const rentForms = await House.relatedQuery("rentForms").for(house.id);
-      return [...contactForms, ...rentForms];
+      const tourForms = await House.relatedQuery("tourForms").for(house.id);
+      return [...contactForms, ...rentForms, ...tourForms];
     },
   },
 };
