@@ -30,6 +30,7 @@
     "graphql": "^14.6.0",
     "graphql-custom-types": "^1.5.1",
     "graphql-import": "^1.0.0-beta.2",
+    "graphql-iso-date": "^3.6.1",
     "graphql-tools": "^4.0.7",
     "graphql-upload": "^10.0.0",
     "install": "^0.13.0",
