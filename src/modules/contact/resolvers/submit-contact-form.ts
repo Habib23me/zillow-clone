@@ -1,25 +1,14 @@
 import User from "../../../models/user";
 import House from "../../../models/house";
 import ContactForm from "../../../models/contact-form";
-import { parsePhoneNumberFromString } from "libphonenumber-js";
-import { UserInputError } from "apollo-server-express";
-import * as EmailValidator from "email-validator";
+import { validatePhone, validateEmail } from "../../../utils/validator";
 
-const submitContactForm = async (
-  _,
-  { input }: { input: ContactForm },
-  { user }: { user: User }
-) => {
+const submitContactForm = async (_, { input }: { input: ContactForm }) => {
   //Verify Email and Phone number
-  const phoneNumber = parsePhoneNumberFromString(input.phone);
-  if (!phoneNumber.isValid()) {
-    throw new UserInputError("Invalid Phone Number!");
-  }
-  input.phone = phoneNumber.number.toString();
 
-  if (!EmailValidator.validate(input.email)) {
-    throw new UserInputError("Invalid Email!");
-  }
+  //Verify Email and Phone number
+  input.phone = validatePhone(input.phone);
+  input.email = validateEmail(input.email);
 
   //fetch house
   const house = await House.query().findById(input.houseId);

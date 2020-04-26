@@ -9,7 +9,7 @@ export async function up(knex: Knex): Promise<any> {
     table.string("shortMessage").defaultTo("");
     table.boolean("isRead").defaultTo(false);
     table
-      .bigInteger("houseId")
+      .integer("houseId")
       .unsigned()
       .index()
       .references("id")

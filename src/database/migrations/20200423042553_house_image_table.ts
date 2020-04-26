@@ -3,14 +3,14 @@ import * as Knex from "knex";
 export async function up(knex: Knex): Promise<any> {
   return knex.schema.createTable("houseImage", (table) => {
     table
-      .bigInteger("houseId")
+      .integer("houseId")
       .unsigned()
       .index()
       .references("id")
       .inTable("house");
 
     table
-      .bigInteger("imageId")
+      .integer("imageId")
       .unsigned()
       .index()
       .references("id")

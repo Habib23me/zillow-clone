@@ -1,0 +1,101 @@
+"""
+Form data that contins fields submitted by someone
+wanting to take a tour of a house
+"""
+type TourForm implements Form {
+  "The Contact Form's Unique Identifier"
+  id: ID!
+  "Name of the person who submitted the form"
+  name: String!
+  "Email of the person who submitted the form"
+  email: String!
+  "Phone Number of the person who submitted the form"
+  phone: String!
+  "The desired move in date of the renter in to the house"
+  desiredMoveInDate: Date
+  "The Gross House Hold Income of the renter per month"
+  grossHouseholdIncome: Float
+  "The desired stay duration of the renter in days"
+  desiredDuration: Int
+  "Short message the person wrote in with the form"
+  shortMessage: String
+  "The house it is submitted to"
+  house: House!
+  "The time it is submitted on"
+  createdAt: DateTime!
+  "A boolean that indicates if the form was read or not by the lister"
+  isRead: Boolean!
+  "The form type"
+  formType: FormType!
+  "The tour dates that are asked"
+  dates: [TourDate!]!
+}
+
+"""
+Time of day of a scheduled tour and it's date
+"""
+type TourDate {
+  id: ID!
+  date: Date!
+  time: TourTime!
+}
+
+"""
+Time of day of a scheduled tour
+"""
+enum TourTime {
+  MORNING
+  AFTERNOON
+  EVENING
+}
+
+"""
+Time of day of a scheduled tour and it's date
+"""
+input tourDateInput {
+  date: Date!
+  time: TourTime!
+}
+
+"""
+An Input type that contains the fields required to send a contact
+me back message to a lister that has a House for rent
+"""
+input tourFormInput {
+  "Name of the person who submitted the form"
+  name: String!
+  "Email of the person who submitted the form"
+  email: String!
+  "Phone Number of the person who submitted the form"
+  phone: String!
+  "The desired move in date of the renter in to the house"
+  desiredMoveInDate: Date
+  "The Gross House Hold Income of the renter per month"
+  grossHouseholdIncome: Float
+  "The desired stay duration of the renter"
+  desiredDuration: Int
+  "Short message the person wrote in with the form"
+  shortMessage: String
+  "The house it is submitted to"
+  houseId: Int!
+  "The tour dates and times of day"
+  dates: [tourDateInput!]!
+}
+
+extend type Query {
+  """
+  Gets a a tour form's information based on its id
+  """
+  tourForm(id: ID!): TourForm @isAuthenticated
+}
+
+extend type Mutation {
+  """
+  Submits a tour form
+  """
+  submitTourForm(input: tourFormInput!): TourForm!
+  """
+  Marks a tour for as read
+  """
+  markTourFormAsRead(id: ID!): TourForm! @isAuthenticated
+}

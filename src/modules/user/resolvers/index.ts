@@ -29,7 +29,8 @@ const resolvers = {
       const houses = User.relatedQuery("houses").for(user.id);
       const contactForms = await House.relatedQuery("contactForms").for(houses);
       const rentForms = await House.relatedQuery("rentForms").for(houses);
-      return [...contactForms, ...rentForms];
+      const tourForms = await House.relatedQuery("tourForms").for(houses);
+      return [...contactForms, ...rentForms, ...tourForms];
     },
   },
 };
