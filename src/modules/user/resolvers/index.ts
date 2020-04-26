@@ -22,15 +22,18 @@ const resolvers = {
     AGENT: 2,
   },
   User: {
-    async houses(user) {
+    async houses(user: User) {
       return await User.relatedQuery("houses").for(user.id);
     },
-    async forms(user) {
+    async forms(user: User) {
       const houses = User.relatedQuery("houses").for(user.id);
       const contactForms = await House.relatedQuery("contactForms").for(houses);
       const rentForms = await House.relatedQuery("rentForms").for(houses);
       const tourForms = await House.relatedQuery("tourForms").for(houses);
       return [...contactForms, ...rentForms, ...tourForms];
+    },
+    async savedHouses(user: User) {
+      return await User.relatedQuery("savedHouses").for(user.id);
     },
   },
 };
