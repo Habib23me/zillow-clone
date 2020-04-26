@@ -6,8 +6,9 @@ import agent from "./agent";
 import house from "./house";
 import contactForm from "./contact";
 import rentForm from "./rent";
-import Form from "./form";
+import form from "./form";
+import tourForm from "./tour";
 
 export default makeExecutableSchemaFromModules({
-  modules: [user, upload, agent, house, Form, contactForm, rentForm],
+  modules: [user, upload, agent, house, form, contactForm, rentForm, tourForm],
 });
