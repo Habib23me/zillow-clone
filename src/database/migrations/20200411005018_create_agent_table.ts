@@ -13,6 +13,7 @@ export async function up(knex: Knex): Promise<any> {
     table.string("brokerageName");
     table.string("brokerageAddress");
     table.string("city");
+    table.string("state");
     table.string("zipCode");
     table.string("licenseNumber");
     table.string("licenceExpirationDate");

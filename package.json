@@ -8,7 +8,10 @@
     "postinstall": "npm run build",
     "build": "tsc && copyup src/**/*.graphql dist/ && rm -rf ./dist/database/migrations/*.d.ts",
     "start": "npm build && node dist/index.js",
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "migrate-latest": "knex migrate:latest --knexfile ./src/database/knexfile.ts",
+    "migrate-rollback": "knex migrate:rollback --knexfile ./src/database/knexfile.ts",
+    "migrate": "npm run migrate-rollback && npm run  migrate-latest"
   },
   "author": "Fitsum Ayalew",
   "license": "ISC",
@@ -16,6 +19,7 @@
     "node": "13.8.x"
   },
   "dependencies": {
+    "@googlemaps/google-maps-services-js": "^2.5.5",
     "apollo-server": "^2.10.0",
     "apollo-server-express": "^2.11.0",
     "bcrypt": "^3.0.8",

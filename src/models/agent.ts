@@ -7,6 +7,7 @@ export default class Agent extends Model {
   brokerageName?: string;
   brokerageAddress?: string;
   city?: string;
+  state?: string;
   zipCode?: string;
   licenseNumber?: string;
   licenceExpirationDate?: Date;
@@ -28,6 +29,7 @@ export default class Agent extends Model {
       brokerageName: { type: "string", minLength: 1, maxLength: 255 },
       brokerageAddress: { type: "string", minLength: 1, maxLength: 255 },
       city: { type: "string", minLength: 1, maxLength: 32 },
+      state: { type: "string", minLength: 1, maxLength: 16 },
       zipCode: { type: "string", minLength: 1, maxLength: 16 },
       licenseNumber: { type: "string", minLength: 1, maxLength: 64 },
       licenceExpirationDate: { type: "Date" },
