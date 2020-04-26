@@ -16,6 +16,7 @@ const saveHouse = async (_, args, { user }: { user: User }) => {
     if (relationExists.length > 0) {
       return house;
     }
+    //add the house as saved
     await house.$relatedQuery("saved").relate(user);
     return house;
   }

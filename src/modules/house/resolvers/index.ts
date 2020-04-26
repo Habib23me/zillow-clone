@@ -46,6 +46,7 @@ const resolvers = {
     async images(house: House) {
       return await House.relatedQuery("images").for(house.id);
     },
+    //return a boolean checking if the current logged in user has the house saved or not
     async isSaved(house: House, args, { user }: { user: User }) {
       const relationExists = await House.relatedQuery("saved")
         .for(house.id)
@@ -55,7 +56,7 @@ const resolvers = {
       }
       return false;
     },
-    //populate contact homes for the house
+    //populate the different forms for the house and append them in one
     async forms(house: House) {
       const contactForms = await House.relatedQuery("contactForms").for(
         house.id

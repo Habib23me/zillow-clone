@@ -14,12 +14,14 @@ const uploadHousePicture = async (
     const house = await House.query().findById(input.houseId);
     //Check if the house exists
     if (house) {
+      //Check if user is lister
       if (house.listerId == user.id) {
-        //If image doesn't exist
+        //upload the image
         const result = await uploadImageStream(
           createReadStream(),
           "/house-images"
         );
+        //add the image entry to db
         const image = await house.$relatedQuery("images").insert({
           imagePath: result.public_id,
         });
