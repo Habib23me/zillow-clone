@@ -15,6 +15,8 @@ export async function up(knex: Knex): Promise<any> {
     table.string("city");
     table.string("state");
     table.string("zipCode");
+    table.decimal("lat", 14, 10);
+    table.decimal("lng", 14, 10);
     table.string("licenseNumber");
     table.string("licenceExpirationDate");
     table.string("website");

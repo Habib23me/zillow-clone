@@ -8,8 +8,8 @@ export async function up(knex: Knex): Promise<any> {
     table.string("state");
     table.string("zipCode");
     table.string("country");
-    table.float("lat", 14, 10);
-    table.float("lng", 14, 10);
+    table.decimal("lat", 14, 10);
+    table.decimal("lng", 14, 10);
     table.float("price").defaultTo(0);
     table.float("livingArea").defaultTo(0);
     table.date("dateSold");
