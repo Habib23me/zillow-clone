@@ -1,6 +1,5 @@
 import Agent from "../../../models/agent";
 import * as GoogleMapsHelper from "../../../utils/googleMaps";
-import { isPositive, isGreaterThanZero } from "../../../utils/validator";
 
 const searchAgent = async (_, { input }) => {
   //base search query

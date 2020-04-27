@@ -1,5 +1,4 @@
 import User from "../../../models/user";
-import House from "../../../models/house";
 import Image from "../../../models/image";
 
 const removeHouseImages = async (_, args, { user }: { user: User }) => {

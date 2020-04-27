@@ -26,6 +26,7 @@ const resolvers = {
     DAYS_ON_ZILLOW_DESC: "created_at.desc",
   },
   SavedSearch: {
+    //populate the user on a saved search
     async user(savedSearch: SavedSearch) {
       return await User.query().findOne("id", savedSearch.userId);
     },
