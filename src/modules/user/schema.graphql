@@ -60,12 +60,12 @@ extend type Query {
 }
 
 extend type Mutation {
-  signup(input: SignUpInput!): String
-  login(input: SignInInput!): String
+  signup(input: SignUpInput!): String!
+  login(input: SignInInput!): String!
+  sendPasswordResetEmail(email: String!): Boolean!
+  resetPassword(input: resetPasswordInput!): Boolean!
+  changeUsername(username: String!): User! @isAuthenticated
+  changePassword(input: changePasswordInput!): Boolean! @isAuthenticated
   uploadProfilePicture(file: Upload!): Image! @isAuthenticated
-  updateProfile(input: UpdateProfileInput): User!
-  changeUsername(username: String): String
-  sendPasswordResetEmail(email: String): Boolean
-  resetPassword(password: String): Boolean
-  changePassword(input: changePasswordInput): Boolean
+  updateProfile(input: UpdateProfileInput!): User! @isAuthenticated
 }
