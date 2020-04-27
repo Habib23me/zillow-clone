@@ -6,6 +6,7 @@ const updateProfile = async (
   { input }: { input: User },
   { user }: { user: User }
 ) => {
+  // update user firstname and lastname
   return await user
     .$query()
     .patch({
