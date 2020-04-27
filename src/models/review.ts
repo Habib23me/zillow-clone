@@ -10,6 +10,8 @@ export default class Review extends Model {
   userId!: number;
   agent!: Agent;
   user!: User;
+  count: number;
+  avg: number;
 
   static tableName = "review";
 
@@ -34,7 +36,7 @@ export default class Review extends Model {
     },
     user: {
       relation: Model.BelongsToOneRelation,
-      modelClass: Agent,
+      modelClass: User,
       join: {
         from: "review.userId",
         to: "user.id",

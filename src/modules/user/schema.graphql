@@ -12,9 +12,10 @@ type User {
   image: String
   role: Role!
   isEmailVerified: Boolean!
-  houses: [House]
-  forms: [Form]
-  savedHouses: [House]
+  houses: [House!]!
+  forms: [Form!]!
+  savedHouses: [House!]!
+  savedSearches: [SavedSearch!]!
 }
 
 input SignInInput {
