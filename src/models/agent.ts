@@ -9,6 +9,8 @@ export default class Agent extends Model {
   city?: string;
   state?: string;
   zipCode?: string;
+  lat?: number;
+  lng?: number;
   licenseNumber?: string;
   licenceExpirationDate?: Date;
   website?: string;
@@ -31,6 +33,8 @@ export default class Agent extends Model {
       city: { type: "string", minLength: 1, maxLength: 32 },
       state: { type: "string", minLength: 1, maxLength: 16 },
       zipCode: { type: "string", minLength: 1, maxLength: 16 },
+      lat: { type: "float" },
+      lng: { type: "float" },
       licenseNumber: { type: "string", minLength: 1, maxLength: 64 },
       licenceExpirationDate: { type: "Date" },
       website: { type: "string", minLength: 1, maxLength: 255 },
