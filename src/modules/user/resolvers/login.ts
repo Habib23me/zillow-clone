@@ -6,7 +6,7 @@ import config from "../../../utils/config";
 
 const login = async (_, { input }: { input: User }) => {
   const user = await User.query()
-    .select("username", "password")
+    .select("email", "username", "password")
     .findOne("email", "=", input.email);
 
   //If user not found return auth error
@@ -22,10 +22,10 @@ const login = async (_, { input }: { input: User }) => {
   //Return Signed JWT
   return jsonwebtoken.sign(
     {
-      username: user.username
+      email: user.email,
     },
-    process.env.JWT_SECRET,
-    { expiresIn: "1h" }
+    config.JWT_SECRET,
+    { expiresIn: config.JWT_LIFE_TIME }
   );
 };
 

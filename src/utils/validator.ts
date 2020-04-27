@@ -53,6 +53,20 @@ const isValidUrl = (url: string, errorMsg: string): boolean => {
   return true;
 };
 
+const validateUsername = (username: string): boolean => {
+  if (username.match(/^[A-Za-z0-9_]{6,15}$/)) {
+    return true;
+  }
+  return false;
+};
+
+const validatePassword = (password: string): boolean => {
+  if (password.match(/(?=.{8,})/)) {
+    return true;
+  }
+  return false;
+};
+
 export {
   validatePhone,
   validateEmail,
@@ -60,4 +74,6 @@ export {
   isGreaterThanZero,
   isPositive,
   isValidUrl,
+  validateUsername,
+  validatePassword,
 };
