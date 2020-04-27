@@ -2,6 +2,11 @@ import User from "../../../models/user";
 import House from "../../../models/house";
 
 const publishHouse = async (_, args, { user }: { user: User }) => {
+  //check if user has verified email
+  if (!user.isVerified) {
+    throw Error("Email needs to be verified before publishing house");
+  }
+
   //fetch the house
   const house = await House.query()
     .findById(args.id)

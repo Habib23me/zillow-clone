@@ -14,6 +14,9 @@ import changePassword from "./change-password";
 import resetPassword from "./reset-password";
 import sendPasswordResetEmail from "./send-password-reset-email";
 
+import verifyEmail from "./verify-email";
+import resendVerificationEmail from "./resend-verification-email";
+
 const resolvers = {
   Query: {
     me,
@@ -29,6 +32,8 @@ const resolvers = {
     changePassword,
     resetPassword,
     sendPasswordResetEmail,
+    verifyEmail,
+    resendVerificationEmail,
   },
   Role: {
     REGISTERED: 1,

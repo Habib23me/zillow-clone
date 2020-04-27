@@ -7,7 +7,7 @@ import { validatePassword } from "../../../utils/validator";
 const resetPassword = async (_, { input }) => {
   const { email } = (await jsonwebtoken.verify(
     input.resetToken,
-    config.JWT_RESET_PASSWORD_SECRET
+    config.JWT_VERIFICATION_PASSWORD_SECRET
   )) as { email: string };
   if (!email) {
     throw Error("Invalid Token");

@@ -7,8 +7,9 @@ export async function up(knex: Knex): Promise<any> {
     table.string("password").notNullable();
     table.string("firstName");
     table.string("lastName");
+    table.boolean("isVerified").defaultTo(false);
     table.string("username").notNullable();
-    table.string("image").defaultTo("default.jpg");
+    table.string("image").defaultTo("zillow/user-images/default");
     table
       .integer("role")
       .unsigned()

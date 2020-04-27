@@ -11,7 +11,7 @@ const getUser = async (req: any) => {
     };
     if (email) {
       const user = await User.query()
-        .select("id", "username", "email", "role")
+        .select("id", "username", "email", "role", "isVerified")
         .findOne("email", "=", email);
 
       if (user) {

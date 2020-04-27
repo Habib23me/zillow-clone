@@ -18,14 +18,14 @@ const changePassword = async (_, { input }, { user }: { user: User }) => {
     throw Error("Invalid New Password");
   }
 
-  //change password
+  //change password in db
   if (
     await user.$query().patch({
       password: await bcrypt.hash(input.newPassword, config.SALT_ROUNDS),
     })
   ) {
     return true;
-  } //
+  }
   return false;
 };
 

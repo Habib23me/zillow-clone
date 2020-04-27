@@ -1,13 +1,9 @@
 import User from "../../../models/user";
 import jsonwebtoken from "jsonwebtoken";
 import config from "../../../utils/config";
-import { sendPasswordEmail } from "../../../utils/mailer";
+import { sendVerifyEmail } from "../../../utils/mailer";
 
-const sendPasswordResetEmail = async (_, args) => {
-  const user = await User.query().findOne(args);
-  if (!user) {
-    throw Error("User account not found!");
-  }
+const resendVerificationEmail = async (_, __, { user }: { user: User }) => {
   const token = jsonwebtoken.sign(
     {
       email: user.email,
@@ -16,11 +12,11 @@ const sendPasswordResetEmail = async (_, args) => {
     { expiresIn: config.JWT_VERIFICATION_LIFE_TIME }
   );
   try {
-    await sendPasswordEmail(args.email, token);
+    await sendVerifyEmail(user.email, token);
   } catch {
     return false;
   }
   return true;
 };
 
-export default sendPasswordResetEmail;
+export default resendVerificationEmail;

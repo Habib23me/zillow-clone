@@ -10,6 +10,7 @@ import {
   validatePassword,
   validateEmail,
 } from "../../../utils/validator";
+import { sendVerifyEmail } from "../../../utils/mailer";
 
 const signup = async (_, { input }: { input: User }) => {
   // Check If email exists
@@ -54,6 +55,18 @@ const signup = async (_, { input }: { input: User }) => {
   if (input.role == 2) {
     await newUser.$relatedQuery("agentProfile").insert({});
   }
+
+  //send email verification email
+  const token = jsonwebtoken.sign(
+    {
+      email: input.email,
+    },
+    config.JWT_VERIFICATION_PASSWORD_SECRET,
+    { expiresIn: config.JWT_VERIFICATION_LIFE_TIME }
+  );
+  try {
+    await sendVerifyEmail(input.email, token);
+  } catch {}
 
   //Return Signed JWT
   return jsonwebtoken.sign(

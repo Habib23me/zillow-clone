@@ -1,72 +1,164 @@
+"""
+The user role in the app
+"""
 enum Role {
   REGISTERED
   AGENT
 }
 
+"""
+Basic user info type
+"""
 type User {
+  "Unique user id"
   id: ID!
+  "Unique user email"
   email: String!
+  "The user's First Name"
   firstName: String
+  "The user's Last Name"
   lastName: String
+  "The user's Unique username"
   username: String!
+  "The user's image"
   image: String
+  "A boolean indicating if the user's email is verified or not"
+  isVerified: Boolean!
+  "The user's access role"
   role: Role!
-  isEmailVerified: Boolean!
+  "The houses the user has listed"
   houses: [House!]!
+  "The forms the user has recived"
   forms: [Form!]!
+  "The houses the user saved"
   savedHouses: [House!]!
+  "The searches the user has saved"
   savedSearches: [SavedSearch!]!
 }
 
+"""
+Input type for sign in
+"""
 input SignInInput {
+  "Email used for signup"
   email: String!
+  "The user's password must be atleast 8 chars"
   password: String!
 }
 
+"""
+Input type for new user sign up
+"""
 input SignUpInput {
+  "The user's email address"
   email: String!
+  "The user's username if left blank a random one will be generated"
   username: String
+  "The user's first name"
   firstName: String!
   lastName: String!
+  "The user's password must be atleast 8 chars"
   password: String!
+  "The user's access role"
   role: Role!
 }
 
+"""
+An image type
+"""
 type Image {
+  "The image's Unique Identifer"
   id: ID
+  "The image's path"
   imagePath: String!
+  "The image's full url"
   fullURL: String!
 }
 
+"""
+Update user profile naem input
+"""
 input UpdateProfileInput {
+  "The user's first name"
   firstName: String
+  "The user's last name"
   lastName: String
-  username: String
 }
 
+"""
+Reset password input
+"""
 input resetPasswordInput {
+  "The token recived through email"
   resetToken: String
+  "The new password to set"
   newPassword: String
 }
 
+"""
+Change password input
+"""
 input changePasswordInput {
+  "The current user password"
   oldPassword: String
+  "The new password to set"
   newPassword: String
 }
 
 extend type Query {
+  """
+  Get current logged in user info
+  """
   me: User! @isAuthenticated
+  """
+  Check if username is taken
+  """
   isUsernameTaken(username: String): Boolean
+  """
+  Check if email is already in use
+  """
   isEmailUsed(email: String): Boolean
 }
 
 extend type Mutation {
+  """
+  Create a new account returns a JWT
+  """
   signup(input: SignUpInput!): String!
+  """
+  Login to account returns a JWT
+  """
   login(input: SignInInput!): String!
+  """
+  Send password reset token to email
+  """
   sendPasswordResetEmail(email: String!): Boolean!
+  """
+  Reset Password using token
+  """
   resetPassword(input: resetPasswordInput!): Boolean!
+  """
+  Change username
+  """
   changeUsername(username: String!): User! @isAuthenticated
+  """
+  Change password
+  """
   changePassword(input: changePasswordInput!): Boolean! @isAuthenticated
+  """
+  Upload a user profile picture
+  """
   uploadProfilePicture(file: Upload!): Image! @isAuthenticated
+  """
+  Update user first and Llast name
+  """
   updateProfile(input: UpdateProfileInput!): User! @isAuthenticated
+  """
+  Verify Email Address
+  """
+  verifyEmail(verificationToken: String!): User! @isAuthenticated
+  """
+  Resend Email Verification Token
+  """
+  resendVerificationEmail: Boolean! @isAuthenticated
 }

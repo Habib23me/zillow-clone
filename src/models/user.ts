@@ -13,6 +13,7 @@ export default class User extends Model {
   username!: string;
   image?: string;
   role!: number;
+  isVerified!: Boolean;
   agentProfile?: Agent;
   houses?: House[];
   savedHouses?: House[];
@@ -32,6 +33,7 @@ export default class User extends Model {
       firstName: { type: "string", minLength: 1, maxLength: 255 },
       lastName: { type: "string", minLength: 1, maxLength: 255 },
       username: { type: "string", minLength: 1, maxLength: 255 },
+      isVerified: { type: "boolean" },
       image: { type: "string" },
       role: { type: "integer" },
     },

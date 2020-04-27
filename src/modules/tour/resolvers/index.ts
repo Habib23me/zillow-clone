@@ -18,6 +18,7 @@ const resolvers = {
     async house(tourForm: TourForm) {
       return await House.query().findById(tourForm.houseId);
     },
+    //populate the tour dates
     async dates(tourForm: TourForm) {
       return await TourForm.relatedQuery("dates").for(tourForm.id);
     },
