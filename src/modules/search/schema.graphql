@@ -1,0 +1,44 @@
+enum SearchOrderTypes {
+  PRICE_ASC
+  PRICE_DESC
+  SQUARE_METER_ASC
+  SQUARE_METER_DESC
+  DAYS_ON_ZILLOW_ASC
+  DAYS_ON_ZILLOW_DESC
+}
+
+input searchHouseFilterInput {
+  homeStatus: HomeStatus
+  homeType: HomeType
+  minPrice: Int
+  maxPrice: Int
+  noOfBathrooms: Float
+  noOfBedrooms: Int
+  noOfParkingSpots: Int
+  isOpenHouse: Boolean
+  minYearBuilt: String
+  maxYearBuilt: String
+  minDaysOnZillow: Int
+  maxDaysOnZillow: Int
+  minSquareMeter: Int
+  maxSquareMeter: Int
+}
+
+input searchHouseInput {
+  queryString: String = "USA"
+  filter: searchHouseFilterInput
+  orderBy: SearchOrderTypes
+  first: Int = 10
+  offset: Int = 0
+}
+
+type HouseSearchResult {
+  first: Int
+  offset: Int
+  total: Int
+  results: [House!]!
+}
+
+extend type Query {
+  searchHouse(input: searchHouseInput!): HouseSearchResult
+}
