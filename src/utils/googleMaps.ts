@@ -15,6 +15,17 @@ interface Address {
   country?: string;
 }
 
+interface Boundaries {
+  northeast: {
+    lat: number;
+    lng: number;
+  };
+  southwest: {
+    lat: number;
+    lng: number;
+  };
+}
+
 async function geocodeAddress(address: string) {
   const client = new Client({});
   const parsedAddress: Address = {};
@@ -79,4 +90,31 @@ async function geocodeAddress(address: string) {
     });
 }
 
-export { geocodeAddress, Address };
+async function geocodeAddressToBoundaries(
+  address: string
+): Promise<Boundaries> {
+  const client = new Client({});
+
+  return client
+    .geocode({
+      params: {
+        address: address,
+        key: config.GOOGLE_MAPS_API_KEY,
+        region: "us",
+      },
+      timeout: 1000, // milliseconds
+    })
+    .then((result) => {
+      if (result.data.status === Status.OK) {
+        try {
+          return result.data.results[0].geometry.viewport;
+        } catch (error) {
+          throw Error("Error Parsing Address");
+        }
+      } else {
+        throw "Error Retrieving Address Info";
+      }
+    });
+}
+
+export { geocodeAddress, geocodeAddressToBoundaries, Address };

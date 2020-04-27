@@ -16,7 +16,7 @@ export async function up(knex: Knex): Promise<any> {
     table.float("noOfBathrooms").defaultTo(0);
     table.integer("noOfBedrooms").defaultTo(0);
     table.integer("noOfParkingSpots").defaultTo(0);
-    table.string("yearBuilt");
+    table.integer("yearBuilt");
     table.boolean("isOpenHouse").defaultTo(false);
     table.boolean("isPublished").defaultTo(false);
     table
