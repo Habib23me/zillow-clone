@@ -17,7 +17,7 @@ export class IsAgentDirective extends SchemaDirectiveVisitor {
       const context = args[2];
 
       if (context.user.role != 2) {
-        throw new AuthenticationError("Not allowed");
+        throw new AuthenticationError("Only allowed for agents");
       }
 
       return resolve.apply(this, args);

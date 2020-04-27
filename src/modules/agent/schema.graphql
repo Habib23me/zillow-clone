@@ -30,10 +30,21 @@ input UpdateAgentProfileInput {
 }
 
 extend type Query {
+  """
+  Get an agent by id
+  """
   agent(id: ID!): Agent!
-  agentProfile: Agent! @isAuthenticated
+  """
+  Get own profile details
+  """
+  agentProfile: Agent! @isAuthenticated @isAgent
 }
 
 extend type Mutation {
+  """
+  Update an agent's profile details
+  """
   updateAgentProfile(input: UpdateAgentProfileInput): Agent!
+    @isAuthenticated
+    @isAgent
 }
