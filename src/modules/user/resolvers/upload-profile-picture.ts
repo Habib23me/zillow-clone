@@ -9,7 +9,9 @@ const uploadProfilePicture = async (
 ) => {
   const { createReadStream, filename, mimetype, encoding } = await file;
   try {
+    //upload image
     const result = await uploadImageStream(createReadStream(), "/user-images");
+    //add image to database
     await user.$query().patch({
       image: result.public_id,
     });

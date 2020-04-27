@@ -6,16 +6,29 @@ import uploadProfilePicture from "./upload-profile-picture";
 import updateProfile from "./update-profile";
 import User from "../../../models/user";
 import House from "../../../models/house";
+import isUsernameTaken from "./is-username-taken";
+import isEmailUsed from "./is-email-used";
+import changeUsername from "./change-username";
+import changePassword from "./change-password";
+
+import resetPassword from "./reset-password";
+import sendPasswordResetEmail from "./send-password-reset-email";
 
 const resolvers = {
   Query: {
     me,
+    isUsernameTaken,
+    isEmailUsed,
   },
   Mutation: {
     login,
     signup,
     uploadProfilePicture,
     updateProfile,
+    changeUsername,
+    changePassword,
+    resetPassword,
+    sendPasswordResetEmail,
   },
   Role: {
     REGISTERED: 1,
