@@ -16,7 +16,6 @@ const signup = async (_, { input }: { input: User }) => {
   // If email exists raise an error
   if (user) throw new UserInputError("Email Already Exists");
 
-  console.log(input);
   // If no user name is given generate one
   if (!input.username) {
     input.username = randomstring.generate(8);
@@ -26,8 +25,6 @@ const signup = async (_, { input }: { input: User }) => {
   // Hash Password, Generate userName And Insert user to database
   input.password = await bcrypt.hash(input.password, SALT_ROUNDS);
   const newUser = await User.query().insert(input).returning("*");
-
-  console.log(newUser.id);
 
   if (input.role == 2) {
     await newUser.$relatedQuery("agentProfile").insert({});

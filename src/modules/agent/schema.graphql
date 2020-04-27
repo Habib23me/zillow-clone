@@ -1,31 +1,63 @@
+"""
+An agent type containg agent profile items
+only avialable for users that are agents
+"""
 type Agent {
+  "The agent's user id"
   userId: ID!
+  "The agent's phone number"
   phone: String
+  "The agent's Brokerage Name"
   brokerageName: String
+  "The agent's Brokerage Street Address"
   brokerageAddress: String
+  "The agent's Brokerage City"
   city: String
+  "The agent's Brokerage State"
   state: String
+  "The agent's Brokerage Zip-Code"
   zipCode: String
+  "The agent's Professional License Number"
   licenseNumber: String
+  "The agent's Professional License Expiration Date"
   licenceExpirationDate: DateTime
+  "The agent's official Website"
   website: String
+  "The agent's official Blog"
   blog: String
+  "The agent's official Twitter"
   twitter: String
+  "The agent's official LinkedIn"
   linkedId: String
 }
 
+"""
+An input type for updating agent profile input
+"""
 input UpdateAgentProfileInput {
+  "The agent's phone number"
   phone: String
+  "The agent's Brokerage Name"
   brokerageName: String
+  "The agent's Brokerage Street Address"
   brokerageAddress: String
+  "The agent's Brokerage City"
   city: String
+  "The agent's Brokerage State"
   state: String
+  "The agent's Brokerage Zip-Code"
   zipCode: String
+  "The agent's Professional License Number"
   licenseNumber: String
+  "The agent's Professional License Expiration Date"
   licenceExpirationDate: DateTime
+  "The agent's official Website"
   website: String
+  "The agent's official Blog"
   blog: String
+  "The agent's official Twitter"
   twitter: String
+  "The agent's official LinkedIn"
   linkedId: String
 }
 

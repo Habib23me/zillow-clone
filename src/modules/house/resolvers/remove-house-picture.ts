@@ -7,7 +7,6 @@ const removeHouseImages = async (_, args, { user }: { user: User }) => {
   const image = await Image.query()
     .findById(args.imageId)
     .withGraphFetched("house");
-  console.log(image);
   //Check if the image and house exists
   if (image && image.house) {
     //Remove image
