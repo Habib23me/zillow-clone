@@ -1,5 +1,6 @@
 import { Model, Modifiers } from "objection";
 import User from "./user";
+import Review from "./review";
 
 export default class Agent extends Model {
   userId!: number;
@@ -18,6 +19,7 @@ export default class Agent extends Model {
   twitter?: string;
   linkedId?: string;
   user?: User;
+  reviews?: Review[];
 
   static idColumn = "userId";
   static tableName = "agent";
@@ -51,6 +53,14 @@ export default class Agent extends Model {
       join: {
         from: "agent.userId",
         to: "user.id",
+      },
+    },
+    reviews: {
+      relation: Model.HasManyRelation,
+      modelClass: Review,
+      join: {
+        from: "agent.userId",
+        to: "review.agentId",
       },
     },
   });

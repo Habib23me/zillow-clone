@@ -1,6 +1,7 @@
 import { Model, Modifiers } from "objection";
 import Agent from "./agent";
 import House from "./house";
+import Review from "./review";
 
 export default class User extends Model {
   id!: number;
@@ -14,6 +15,7 @@ export default class User extends Model {
   agentProfile?: Agent;
   houses?: House[];
   savedHouses?: House[];
+  reviewsSubmitted?: Review[];
 
   static tableName = "user";
 
@@ -60,6 +62,14 @@ export default class User extends Model {
           to: "savedHouse.houseId",
         },
         to: "house.id",
+      },
+    },
+    reviewsSubmitted: {
+      relation: Model.HasManyRelation,
+      modelClass: Review,
+      join: {
+        from: "user.id",
+        to: "review.userId",
       },
     },
   });
