@@ -29,6 +29,8 @@ type Agent {
   twitter: String
   "The agent's official LinkedIn"
   linkedId: String
+  reviewCount: Int!
+  reviewAvg: Float!
   reviews: [Review!]!
 }
 

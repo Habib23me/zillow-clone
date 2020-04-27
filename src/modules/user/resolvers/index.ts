@@ -48,6 +48,9 @@ const resolvers = {
     async savedHouses(user: User) {
       return await User.relatedQuery("savedHouses").for(user.id);
     },
+    async savedSearches(user: User) {
+      return await User.relatedQuery("savedSearches").for(user.id);
+    },
   },
 };
 

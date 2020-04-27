@@ -4,6 +4,7 @@ import updateAgentProfile from "./update-agent-profile";
 import agent from "./agent";
 import review from "./review";
 import Review from "../../../models/review";
+import Agent from "../../../models/agent";
 
 const resolvers = {
   Query: {
@@ -23,6 +24,26 @@ const resolvers = {
     //populate lister user data
     async agent(review: Review) {
       return await review.$relatedQuery("agent");
+    },
+  },
+  Agent: {
+    async reviewCount(agent: Agent) {
+      const count = await Review.query()
+        .where("agentId", agent.userId)
+        .count("id");
+      if (count[0]) {
+        return count[0].count;
+      }
+      return 0;
+    },
+    async reviewAvg(agent: Agent) {
+      const avg = await Review.query()
+        .where("agentId", agent.userId)
+        .avg("rating");
+      if (avg[0]) {
+        return avg[0].avg;
+      }
+      return 0;
     },
   },
 };
