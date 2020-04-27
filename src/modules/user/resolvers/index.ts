@@ -6,10 +6,14 @@ import uploadProfilePicture from "./upload-profile-picture";
 import updateProfile from "./update-profile";
 import User from "../../../models/user";
 import House from "../../../models/house";
+import isUsernameTaken from "./is-username-taken";
+import isEmailUsed from "./is-email-used";
 
 const resolvers = {
   Query: {
     me,
+    isUsernameTaken,
+    isEmailUsed,
   },
   Mutation: {
     login,

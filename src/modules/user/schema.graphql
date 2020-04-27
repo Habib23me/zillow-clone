@@ -11,6 +11,7 @@ type User {
   username: String!
   image: String
   role: Role!
+  isEmailVerified: Boolean!
   houses: [House]
   forms: [Form]
   savedHouses: [House]
@@ -36,14 +37,26 @@ type Image {
   fullURL: String!
 }
 
-extend type Query {
-  me: User! @isAuthenticated
-}
-
 input UpdateProfileInput {
   firstName: String
   lastName: String
   username: String
+}
+
+input resetPasswordInput {
+  resetToken: String
+  newPassword: String
+}
+
+input changePasswordInput {
+  oldPassword: String
+  newPassword: String
+}
+
+extend type Query {
+  me: User! @isAuthenticated
+  isUsernameTaken(username: String): Boolean
+  isEmailUsed(email: String): Boolean
 }
 
 extend type Mutation {
@@ -51,4 +64,8 @@ extend type Mutation {
   login(input: SignInInput!): String
   uploadProfilePicture(file: Upload!): Image! @isAuthenticated
   updateProfile(input: UpdateProfileInput): User!
+  changeUsername(username: String): String
+  sendPasswordResetEmail(email: String): Boolean
+  resetPassword(password: String): Boolean
+  changePassword(input: changePasswordInput): Boolean
 }
