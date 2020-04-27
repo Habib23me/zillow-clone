@@ -54,7 +54,7 @@ type House {
   "Boolean indicating if the house is listed for the public to see"
   isPublished: Boolean
   "The house's current status"
-  homeStatus: HomeStatus!
+  homeStatus: HomeStatus
   "The house's type"
   homeType: HomeType
   "The user who listed the property"
