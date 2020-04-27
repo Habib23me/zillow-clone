@@ -2,6 +2,8 @@ import cloudinary from "cloudinary";
 import { v4 as uuidv4 } from "uuid";
 import config from "./config";
 
+//Takes an image stream and a folder name
+//generates a unique file name and uploads it to cloudinary
 const uploadImageStream = (
   stream: any,
   folder: string

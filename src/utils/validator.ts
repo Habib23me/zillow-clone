@@ -46,6 +46,7 @@ const isDateInTheFuture = (date: Date, errorMsg: string): boolean => {
   return true;
 };
 
+//Checks if the url is in correct format and works
 const isValidUrl = (url: string, errorMsg: string): boolean => {
   if (url && !validUrl.isUri(url)) {
     throw Error(errorMsg);
@@ -53,6 +54,8 @@ const isValidUrl = (url: string, errorMsg: string): boolean => {
   return true;
 };
 
+//Validate username is only numbers letters, underscore
+//or numbers and also is at least 8 chars long
 const validateUsername = (username: string): boolean => {
   if (username.match(/^[A-Za-z0-9_]{6,15}$/)) {
     return true;
@@ -60,6 +63,7 @@ const validateUsername = (username: string): boolean => {
   return false;
 };
 
+//Validate password is at least 8 chars long
 const validatePassword = (password: string): boolean => {
   if (password.match(/(?=.{8,})/)) {
     return true;

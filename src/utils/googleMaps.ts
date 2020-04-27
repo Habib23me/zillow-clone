@@ -26,6 +26,7 @@ interface Boundaries {
   };
 }
 
+//Geocode and address string to an Address Interface
 async function geocodeAddress(address: string) {
   const client = new Client({});
   const parsedAddress: Address = {};
@@ -90,6 +91,7 @@ async function geocodeAddress(address: string) {
     });
 }
 
+//Geocode and address string to it's Boundaries
 async function geocodeAddressToBoundaries(
   address: string
 ): Promise<Boundaries> {

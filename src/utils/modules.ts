@@ -9,6 +9,8 @@ const globalTypeDefs = gql`
   type Mutation
 `;
 
+//Takes all the modules sticks the graphql typedefs,resolvers
+//schema directives and makes an executable schema
 export const makeExecutableSchemaFromModules = ({
   modules,
 }: {
