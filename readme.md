@@ -1,8 +1,8 @@
 <div align="center">
 
-Zillow-Clone
+####Zillow-Clone
 
-### A clone of zillow backend made with typescript, GraphQL and ❤️
+### A clone of Zillow backend made with typescript, GraphQL and ❤️
 
 </div>
 
@@ -53,10 +53,10 @@ zillow-clone/
     |   ├── tour        # Tour form module
     |   ├── upload      # Upload scalar type module
     |   └── user        # User authentication and profile module
-    ├── scalars        #GraphQL scalars
-    ├── utils
-    ├── app.ts         # Worker server (email sending)
-    └── index.ts        # Worker server (search indexing; syncing with Algolia)
+    ├── scalars         # GraphQL scalars
+    ├── utils           # Different utility functions
+    ├── app.ts
+    └── index.ts
 ```
 
 ### First time setup
