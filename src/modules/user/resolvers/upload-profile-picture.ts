@@ -9,13 +9,15 @@ const uploadProfilePicture = async (
 ) => {
   const { createReadStream, filename, mimetype, encoding } = await file;
   try {
-    const result = await uploadImageStream(createReadStream());
+    //upload image
+    const result = await uploadImageStream(createReadStream(), "/user-images");
+    //add image to database
     await user.$query().patch({
       image: result.public_id,
     });
     return {
-      publicId: result.public_id,
-      url: result.secure_url,
+      imagePath: result.public_id,
+      fullURL: result.url,
     };
   } catch (error) {
     throw new ApolloError("Image Upload Failed");

@@ -1,8 +1,10 @@
 import isAuthenticated from "./is-authenticated";
+import isAgent from "./is-agent";
 
 export default {
-  typeDefs: [isAuthenticated.typeDef],
+  typeDefs: [isAuthenticated.typeDef, isAgent.typeDef],
   schemaDirectives: {
-    isAuthenticated: isAuthenticated.directive
-  }
+    isAuthenticated: isAuthenticated.directive,
+    isAgent: isAgent.directive,
+  },
 };

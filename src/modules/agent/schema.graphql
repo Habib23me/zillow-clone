@@ -1,0 +1,125 @@
+"""
+An agent type containg agent profile items
+only avialable for users that are agents
+"""
+type Agent {
+  "The agent's user id"
+  userId: ID!
+  "The agent's phone number"
+  phone: String
+  "The agent's Brokerage Name"
+  brokerageName: String
+  "The agent's Brokerage Street Address"
+  brokerageAddress: String
+  "The agent's Brokerage City"
+  city: String
+  "The agent's Brokerage State"
+  state: String
+  "The agent's Brokerage Zip-Code"
+  zipCode: String
+  "The agent's Professional License Number"
+  licenseNumber: String
+  "The agent's Professional License Expiration Date"
+  licenceExpirationDate: DateTime
+  "The agent's official Website"
+  website: String
+  "The agent's official Blog"
+  blog: String
+  "The agent's official Twitter"
+  twitter: String
+  "The agent's official LinkedIn"
+  linkedId: String
+  "The total count of reviews an agent has"
+  reviewCount: Int!
+  "The avg rating an agent has null if total review count is 0"
+  reviewAvg: Float
+  "Reviews that the agent got so far"
+  reviews: [Review!]!
+}
+
+"""
+Type containing a review text and the rating
+"""
+type Review {
+  "Review unique id"
+  id: ID!
+  "The user that wrote the user"
+  user: User!
+  "The agent to whom the review is written to"
+  agent: Agent!
+  "The review text"
+  review: String!
+  "The rating of the agent from 1 to 5"
+  rating: Int!
+}
+
+"""
+input type for adding a new review to an agent
+"""
+input reviewInput {
+  "The agent id to whom the review is written to"
+  agentId: ID!
+  "The review text"
+  review: String!
+  "The rating of the agent from 1 to 5"
+  rating: Int!
+}
+
+"""
+An input type for updating agent profile input
+"""
+input UpdateAgentProfileInput {
+  "The agent's phone number"
+  phone: String
+  "The agent's Brokerage Name"
+  brokerageName: String
+  "The agent's Brokerage Street Address"
+  brokerageAddress: String
+  "The agent's Brokerage City"
+  city: String
+  "The agent's Brokerage State"
+  state: String
+  "The agent's Brokerage Zip-Code"
+  zipCode: String
+  "The agent's Professional License Number"
+  licenseNumber: String
+  "The agent's Professional License Expiration Date"
+  licenceExpirationDate: DateTime
+  "The agent's official Website"
+  website: String
+  "The agent's official Blog"
+  blog: String
+  "The agent's official Twitter"
+  twitter: String
+  "The agent's official LinkedIn"
+  linkedId: String
+}
+
+extend type Query {
+  """
+  Get an agent by id
+  """
+  agent(id: ID!): Agent!
+  """
+  Get own profile details
+  """
+  agentProfile: Agent! @isAuthenticated @isAgent
+  """
+  get a review detail info by id
+  """
+  review(id: ID!): Review!
+}
+
+extend type Mutation {
+  """
+  Update an agent's profile details
+  """
+  updateAgentProfile(input: UpdateAgentProfileInput!): Agent!
+    @isAuthenticated
+    @isAgent
+
+  """
+  add a new review for an agent
+  """
+  addReview(input: reviewInput!): Review! @isAuthenticated
+}

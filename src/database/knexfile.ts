@@ -1,10 +1,9 @@
 // Update with your config settings.
 
-import DATABASE_URL from "../utils/config";
-
+import config from "../utils/config";
 export = {
   development: {
-    client: "postgresql",
+    client: "pg",
     connection: {
       database: "zillow",
       user: "postgres",
@@ -20,25 +19,27 @@ export = {
   },
 
   staging: {
-    client: "postgresql",
-    connection: DATABASE_URL,
+    client: "pg",
+    connection: config.DATABASE_URL,
+    migrations: {
+      tableName: "knex_migrations",
+    },
     pool: {
       min: 2,
       max: 10,
     },
-    migrations: {
-      tableName: "knex_migrations",
-    },
+    ssl: true,
   },
   production: {
-    client: "postgresql",
-    connection: DATABASE_URL,
+    client: "pg",
+    connection: config.DATABASE_URL,
+    migrations: {
+      tableName: "knex_migrations",
+    },
     pool: {
       min: 2,
       max: 10,
     },
-    migrations: {
-      tableName: "knex_migrations",
-    },
+    ssl: true,
   },
 };

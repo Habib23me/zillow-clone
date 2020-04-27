@@ -1,0 +1,202 @@
+"""
+All available search result ordering types
+"""
+enum SearchOrderTypes {
+  PRICE_ASC
+  PRICE_DESC
+  SQUARE_METER_ASC
+  SQUARE_METER_DESC
+  DAYS_ON_ZILLOW_ASC
+  DAYS_ON_ZILLOW_DESC
+}
+
+"""
+Search house filter inputs
+"""
+input searchHouseFilterInput {
+  "The house's current status"
+  homeStatus: HomeStatus
+  "The house's type"
+  homeType: HomeType
+  "Min price should always be positive"
+  minPrice: Int
+  "Man price should always be positive"
+  maxPrice: Int
+  "Number of Bathrooms is an integer or a half"
+  noOfBathrooms: Float
+  "Number of Bedrooms is an integer or a half"
+  noOfBedrooms: Int
+  "Number of Parking Spots is an integer or a half"
+  noOfParkingSpots: Int
+  "Indicates if the house is open for visitors"
+  isOpenHouse: Boolean
+  "Min Year Built always should be a valid year"
+  minYearBuilt: String
+  "Max Year Built always should be a valid year"
+  maxYearBuilt: String
+  "Min Days on Zillow always should be positive"
+  minDaysOnZillow: Int
+  "Max Days on Zillow  always should be positive"
+  maxDaysOnZillow: Int
+  "Min SquareMeter always should be positive"
+  minSquareMeter: Int
+  "Max SquareMeter always should be positive"
+  maxSquareMeter: Int
+}
+
+"""
+Search house inputs
+"""
+input searchHouseInput {
+  "The address string to query for"
+  queryString: String = "USA"
+  "The filter criterias"
+  filter: searchHouseFilterInput
+  "The order to return the results in"
+  orderBy: SearchOrderTypes
+  "The amount of result to return"
+  first: Int = 10
+  "An offset of where to start from"
+  offset: Int = 0
+}
+
+"""
+Same as a search filter input used for returning
+saved searchs
+"""
+type searchHouseFilter {
+  "The house's current status"
+  homeStatus: HomeStatus
+  "The house's type"
+  homeType: HomeType
+  "Min price should always be positive"
+  minPrice: Int
+  "Man price should always be positive"
+  maxPrice: Int
+  "Number of Bathrooms is an integer or a half"
+  noOfBathrooms: Float
+  "Number of Bedrooms is an integer or a half"
+  noOfBedrooms: Int
+  "Number of Parking Spots is an integer or a half"
+  noOfParkingSpots: Int
+  "Indicates if the house is open for visitors"
+  isOpenHouse: Boolean
+  "Min Year Built always should be a valid year"
+  minYearBuilt: String
+  "Max Year Built always should be a valid year"
+  maxYearBuilt: String
+  "Min Days on Zillow always should be positive"
+  minDaysOnZillow: Int
+  "Max Days on Zillow  always should be positive"
+  maxDaysOnZillow: Int
+  "Min SquareMeter always should be positive"
+  minSquareMeter: Int
+  "Max SquareMeter always should be positive"
+  maxSquareMeter: Int
+}
+
+"""
+Same as a search house input for returning
+saved searchs
+"""
+type searchHouse {
+  "The address string to query for"
+  queryString: String
+  "The filter criterias"
+  filter: searchHouseFilter
+  "The order to return the results in"
+  orderBy: SearchOrderTypes
+  "The amount of result to return"
+  first: Int
+  "An offset of where to start from"
+  offset: Int
+}
+
+"""
+Search house result type
+"""
+type HouseSearchResult {
+  "The amount of result to return"
+  first: Int!
+  "An offset of where to start from"
+  offset: Int!
+  "The total search result count"
+  total: Int!
+  "A list of houses found matching the search criteria"
+  results: [House!]!
+}
+
+"""
+Search agent result type
+"""
+type AgentSearchResult {
+  "The amount of result to return"
+  first: Int!
+  "An offset of where to start from"
+  offset: Int!
+  "The total search result count"
+  total: Int!
+  "A list of agents found matching the search criteria"
+  results: [Agent!]!
+}
+
+"""
+Search agent inputs
+"""
+input searchAgentInput {
+  name: String
+  address: String = "USA"
+  first: Int = 10
+  offset: Int = 0
+}
+
+"""
+User saved search results type
+"""
+type SavedSearch {
+  "Unique saved search identifier"
+  id: ID!
+  "The name the user gave while saving the search"
+  name: String!
+  "The search Query"
+  searchQuery: searchHouse!
+  "The user who saved the search"
+  user: User
+}
+
+"""
+save a house seach input type
+"""
+input saveSearchInput {
+  "The name the user gave while saving the search"
+  name: String!
+  "The search Query"
+  searchQuery: searchHouseInput!
+}
+
+extend type Query {
+  """
+  Search for a house by it's address, filter and paginated
+  """
+  searchHouse(input: searchHouseInput!): HouseSearchResult
+  """
+  Search for an agent by it's address or name or both and then
+  filter and paginate it
+  """
+  searchAgent(input: searchAgentInput!): AgentSearchResult
+  """
+  Get a saved search detail by ID
+  """
+  savedSearch(id: ID!): SavedSearch! @isAuthenticated
+}
+
+extend type Mutation {
+  """
+  Save a user's search
+  """
+  saveSearch(input: saveSearchInput!): SavedSearch! @isAuthenticated
+  """
+  Remove a user's search
+  """
+  removeSavedSearch(id: ID!): Boolean @isAuthenticated
+}

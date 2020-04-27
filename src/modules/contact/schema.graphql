@@ -1,0 +1,59 @@
+"""
+Contact Form data that contins fields submitted by someone
+wanting to buy a house
+"""
+type ContactForm implements Form {
+  "The Contact Form's Unique Identifier"
+  id: ID!
+  "Name of the person who submitted the form"
+  name: String!
+  "Email of the person who submitted the form"
+  email: String!
+  "Phone Number of the person who submitted the form"
+  phone: String!
+  "Short message the person wrote in with the form"
+  shortMessage: String
+  "The house it is submitted to"
+  house: House!
+  "The time it is submitted on"
+  createdAt: DateTime!
+  "A boolean that indicates if the form was read or not by the lister"
+  isRead: Boolean!
+  "The form type"
+  formType: FormType!
+}
+
+"""
+An Input type that contains the fields required to send a contact
+me back message to a lister that has a House on sale
+"""
+input contactFormInput {
+  "Name of the person who submitted the form"
+  name: String!
+  "Email of the person who submitted the form"
+  email: String!
+  "Phone Number of the person who submitted the form"
+  phone: String!
+  "Short message the person wrote in with the form"
+  shortMessage: String
+  "The house it is submitted to"
+  houseId: Int!
+}
+
+extend type Query {
+  """
+  Gets a contact forms information based on it's id
+  """
+  contactForm(id: ID!): ContactForm @isAuthenticated
+}
+
+extend type Mutation {
+  """
+  Submits a contact form
+  """
+  submitContactForm(input: contactFormInput!): ContactForm!
+  """
+  Marks a contact for as read
+  """
+  markContactFormAsRead(id: ID!): ContactForm! @isAuthenticated
+}

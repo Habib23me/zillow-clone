@@ -1,0 +1,29 @@
+"""
+The avilable form types in zillow
+"""
+enum FormType {
+  CONTACT_FORM
+  RENT_FORM
+  TOUR_FORM
+}
+
+interface Form {
+  "The Contact Form's Unique Identifier"
+  id: ID!
+  "Name of the person who submitted the form"
+  name: String!
+  "Email of the person who submitted the form"
+  email: String!
+  "Phone Number of the person who submitted the form"
+  phone: String!
+  "Short message the person wrote in with the form"
+  shortMessage: String
+  "The house it is submitted to"
+  house: House!
+  "The time it is submitted on"
+  createdAt: DateTime!
+  "A boolean that indicates if the form was read or not by the lister"
+  isRead: Boolean!
+  "The form type"
+  formType: FormType!
+}

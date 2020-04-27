@@ -1,0 +1,71 @@
+"""
+Form data that contins fields submitted by someone
+wanting to rent a house
+"""
+type RentForm implements Form {
+  "The Contact Form's Unique Identifier"
+  id: ID!
+  "Name of the person who submitted the form"
+  name: String!
+  "Email of the person who submitted the form"
+  email: String!
+  "Phone Number of the person who submitted the form"
+  phone: String!
+  "The desired move in date of the renter in to the house"
+  desiredMoveInDate: Date
+  "The Gross House Hold Income of the renter per month"
+  grossHouseholdIncome: Float
+  "The desired stay duration of the renter in days"
+  desiredDuration: Int
+  "Short message the person wrote in with the form"
+  shortMessage: String
+  "The house it is submitted to"
+  house: House!
+  "The time it is submitted on"
+  createdAt: DateTime!
+  "A boolean that indicates if the form was read or not by the lister"
+  isRead: Boolean!
+  "The form type"
+  formType: FormType!
+}
+
+"""
+An Input type that contains the fields required to send a contact
+me back message to a lister that has a House for rent
+"""
+input rentFormInput {
+  "Name of the person who submitted the form"
+  name: String!
+  "Email of the person who submitted the form"
+  email: String!
+  "Phone Number of the person who submitted the form"
+  phone: String!
+  "The desired move in date of the renter in to the house"
+  desiredMoveInDate: Date
+  "The Gross House Hold Income of the renter per month"
+  grossHouseholdIncome: Float
+  "The desired stay duration of the renter"
+  desiredDuration: Int
+  "Short message the person wrote in with the form"
+  shortMessage: String
+  "The house it is submitted to"
+  houseId: Int!
+}
+
+extend type Query {
+  """
+  Gets a rent form's information based on its id
+  """
+  rentForm(id: ID!): RentForm @isAuthenticated
+}
+
+extend type Mutation {
+  """
+  Submits a rent form
+  """
+  submitRentForm(input: rentFormInput!): RentForm!
+  """
+  Marks a rent for as read
+  """
+  markRentFormAsRead(id: ID!): RentForm! @isAuthenticated
+}
