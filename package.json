@@ -7,11 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "npm run build",
     "build": "tsc && copyup src/**/*.graphql dist/ && rm -rf ./dist/database/migrations/*.d.ts",
-    "start": "npm build && node dist/index.js",
-    "dev": "nodemon",
-    "migrate-latest": "knex migrate:latest --knexfile ./src/database/knexfile.ts",
-    "migrate-rollback": "knex migrate:rollback --knexfile ./src/database/knexfile.ts",
-    "migrate": "npm run migrate-rollback && npm run  migrate-latest"
+    "start": "npm run-script build && node dist/index.js",
+    "dev": "nodemon"
   },
   "author": "Fitsum Ayalew",
   "license": "ISC",
