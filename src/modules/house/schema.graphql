@@ -48,7 +48,7 @@ type House {
   "The house's number of parinkg spots"
   noOfParkingSpots: Int
   "The year the house was built on"
-  yearBuilt: String
+  yearBuilt: Int
   "Boolean indicating if the house is open for vistors"
   isOpenHouse: Boolean
   "Boolean indicating if the house is listed for the public to see"
@@ -96,7 +96,7 @@ input newHouseInput {
   "The house's number of parinkg spots"
   noOfParkingSpots: Int
   "The year the house was built on"
-  yearBuilt: String
+  yearBuilt: Int
   "Boolean indicating if the house is open for vistors"
   isOpenHouse: Boolean
   "The house's current status"
@@ -122,7 +122,7 @@ input updateHouseInput {
   "The house's number of parinkg spots"
   noOfParkingSpots: Int
   "The year the house was built on"
-  yearBuilt: String
+  yearBuilt: Int
   "Boolean indicating if the house is open for vistors"
   isOpenHouse: Boolean
   "The house's current status"

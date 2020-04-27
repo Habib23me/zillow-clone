@@ -32,6 +32,17 @@ const updateHouse = async (
     if (input.livingArea && input.livingArea < 0) {
       throw Error("Invalid living area");
     }
+
+    //Validate year built
+    if (input.yearBuilt && !(input.yearBuilt > 0 && input.yearBuilt < 9999)) {
+      throw Error("Invalid Year built");
+    } else {
+      //If in the past
+      const now = new Date();
+      if (input.yearBuilt > now.getFullYear()) {
+        throw Error("Invalid Year built");
+      }
+    }
     // Validate price
     if (input.price && input.price < 0) {
       throw Error("Invalid price");

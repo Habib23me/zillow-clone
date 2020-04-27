@@ -20,7 +20,7 @@ export default class House extends Model {
   noOfBathrooms?: number;
   noOfBedrooms?: number;
   noOfParkingSpots?: number;
-  yearBuilt?: Date;
+  yearBuilt?: number;
   isOpenHouse?: boolean;
   isPublished?: boolean;
   homeStatus?: number;

@@ -48,6 +48,17 @@ const addHouse = async (
   // Validate price
   isPositive(input.price, "Invalid price");
 
+  //Validate year built
+  if (input.yearBuilt && !(input.yearBuilt > 0 && input.yearBuilt < 9999)) {
+    throw Error("Invalid Year built");
+  } else {
+    //If in the past
+    const now = new Date();
+    if (input.yearBuilt > now.getFullYear()) {
+      throw Error("Invalid Year built");
+    }
+  }
+
   //replace the address by the parsed one
   input.city = address.city;
   input.zipCode = address.zipCode;
