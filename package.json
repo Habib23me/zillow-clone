@@ -38,6 +38,7 @@
     "knex": "^0.20.9",
     "libphonenumber-js": "^1.7.50",
     "lodash": "^4.17.15",
+    "nodemailer": "^6.4.6",
     "objection": "^2.1.2",
     "pg": "^7.18.1",
     "randomstring": "^1.1.5",

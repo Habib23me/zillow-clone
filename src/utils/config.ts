@@ -15,6 +15,9 @@ const JWT_RESET_PASSWORD_SECRET = process.env.JWT_RESET_PASSWORD_SECRET || "";
 const JWT_RESET_PASSWORD_LIFE_TIME =
   process.env.JWT_RESET_PASSWORD_LIFE_TIME || "";
 
+const GMAIL_EMAIL = process.env.GMAIL_EMAIL || "";
+const GMAIL_PASSWORD = process.env.GMAIL_PASSWORD || "";
+
 export default {
   DATABASE_URL,
   PORT,
@@ -28,4 +31,6 @@ export default {
   SALT_ROUNDS,
   JWT_RESET_PASSWORD_SECRET,
   JWT_RESET_PASSWORD_LIFE_TIME,
+  GMAIL_EMAIL,
+  GMAIL_PASSWORD,
 };
