@@ -1,6 +1,6 @@
 <div align="center">
 
-####Zillow-Clone
+# Zillow-Clone
 
 ### A clone of Zillow backend made with typescript, GraphQL and ❤️
 
@@ -12,16 +12,18 @@ Zillow is an online real estate and rental marketplace. It’s primary customers
 
 ## Docs
 
-- [What is Zillow?](#what-is-zillow)
-- [Docs](#docs)
-  - [Codebase](#codebase)
-    - [Technologies](#technologies)
-    - [Folder structure](#folder-structure)
-  - [First time setup](#first-time-setup)
-    - [Installation](#installation)
-    - [Migrating the database](#migrating-the-database)
-  - [Running the app locally](#running-the-app-locally)
-  - [Running the app locally for development](#running-the-app-locally-for-development)
+- [Zillow-Clone](#zillow-clone)
+    - [A clone of Zillow backend made with typescript, GraphQL and ❤️](#a-clone-of-zillow-backend-made-with-typescript-graphql-and-%e2%9d%a4%ef%b8%8f)
+  - [What is Zillow?](#what-is-zillow)
+  - [Docs](#docs)
+    - [Codebase](#codebase)
+      - [Technologies](#technologies)
+      - [Folder structure](#folder-structure)
+    - [First time setup](#first-time-setup)
+      - [Installation](#installation)
+      - [Migrating the database](#migrating-the-database)
+    - [Running the app locally](#running-the-app-locally)
+    - [Running the app locally for development](#running-the-app-locally-for-development)
 
 ### Codebase
 
