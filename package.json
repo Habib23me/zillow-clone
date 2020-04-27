@@ -8,7 +8,9 @@
     "postinstall": "npm run build",
     "build": "tsc && copyup src/**/*.graphql dist/ && rm -rf ./dist/database/migrations/*.d.ts",
     "start": "npm run-script build && node dist/index.js",
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "migrate:latest": "knex migrate:latest --knexfile ./src/database/knexfile.js",
+    "migrate:rollback": "knex migrate:rollback --knexfile ./src/database/knexfile.js"
   },
   "author": "Fitsum Ayalew",
   "license": "ISC",
