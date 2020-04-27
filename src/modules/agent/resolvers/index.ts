@@ -27,23 +27,19 @@ const resolvers = {
     },
   },
   Agent: {
+    //get the total count of reviews the agent has
     async reviewCount(agent: Agent) {
       const count = await Review.query()
         .where("agentId", agent.userId)
         .count("id");
-      if (count[0]) {
-        return count[0].count;
-      }
-      return 0;
+      return count[0].count;
     },
     async reviewAvg(agent: Agent) {
+      //get the average agent rating
       const avg = await Review.query()
         .where("agentId", agent.userId)
         .avg("rating");
-      if (avg[0]) {
-        return avg[0].avg;
-      }
-      return 0;
+      return avg[0].avg;
     },
   },
 };

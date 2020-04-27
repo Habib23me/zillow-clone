@@ -29,8 +29,11 @@ type Agent {
   twitter: String
   "The agent's official LinkedIn"
   linkedId: String
+  "The total count of reviews an agent has"
   reviewCount: Int!
-  reviewAvg: Float!
+  "The avg rating an agent has null if total review count is 0"
+  reviewAvg: Float
+  "Reviews that the agent got so far"
   reviews: [Review!]!
 }
 
