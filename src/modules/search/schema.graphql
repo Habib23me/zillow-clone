@@ -32,13 +32,71 @@ input searchHouseInput {
   offset: Int = 0
 }
 
-type HouseSearchResult {
+type searchHouseFilter {
+  homeStatus: HomeStatus
+  homeType: HomeType
+  minPrice: Int
+  maxPrice: Int
+  noOfBathrooms: Float
+  noOfBedrooms: Int
+  noOfParkingSpots: Int
+  isOpenHouse: Boolean
+  minYearBuilt: String
+  maxYearBuilt: String
+  minDaysOnZillow: Int
+  maxDaysOnZillow: Int
+  minSquareMeter: Int
+  maxSquareMeter: Int
+}
+
+type searchHouse {
+  queryString: String
+  filter: searchHouseFilter
+  orderBy: SearchOrderTypes
   first: Int
   offset: Int
-  total: Int
+}
+
+type HouseSearchResult {
+  first: Int!
+  offset: Int!
+  total: Int!
   results: [House!]!
+}
+
+type AgentSearchResult {
+  first: Int!
+  offset: Int!
+  total: Int!
+  results: [Agent!]!
+}
+
+input searchAgentInput {
+  name: String
+  address: String = "USA"
+  first: Int = 10
+  offset: Int = 0
+}
+
+type SavedSearch {
+  id: ID!
+  name: String!
+  searchQuery: searchHouse!
+  user: User
+}
+
+input saveSearchInput {
+  name: String!
+  searchQuery: searchHouseInput!
 }
 
 extend type Query {
   searchHouse(input: searchHouseInput!): HouseSearchResult
+  searchAgent(input: searchAgentInput!): AgentSearchResult
+  savedSearch(id: ID!): SavedSearch! @isAuthenticated
+}
+
+extend type Mutation {
+  saveSearch(input: saveSearchInput!): SavedSearch! @isAuthenticated
+  removeSavedSearch(id: ID!): Boolean @isAuthenticated
 }
